@@ -1,0 +1,6 @@
+class Student(name) {
+    _id = 1
+}
+
+let s = Student("nam")
+out(s._id)

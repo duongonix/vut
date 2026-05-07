@@ -1,0 +1,5 @@
+fn add(a, b) {
+  return a + b
+}
+
+add(a = 1, 2)

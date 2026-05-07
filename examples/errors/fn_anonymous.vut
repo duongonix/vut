@@ -1,0 +1,3 @@
+let callback = fn () {
+  out("nope")
+}

@@ -1,0 +1,5 @@
+let value = "a"
+let result = match value {
+  "b" => 1
+}
+out(result)

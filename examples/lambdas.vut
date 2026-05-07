@@ -1,0 +1,26 @@
+let clicked = () {
+  out("clicked")
+}
+
+let add = (a, b) => a + b
+
+let mul = (a, b) {
+  a * b
+}
+
+fn run(callback) {
+  callback()
+}
+
+fn apply(value, callback) {
+  callback(value)
+}
+
+clicked()
+out("add = {add(2, 3)}")
+out("mul = {mul(3, 4)}")
+run(() {
+  out("inline block")
+})
+out("inline arrow = {apply(6, (x) => x * 2)}")
+out("group = {(2 + 3) * 4}")

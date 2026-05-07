@@ -1,0 +1,34 @@
+com App(id) {
+  return child(
+    id = id,
+    name = "Vut"
+  )
+}
+
+com Button(onclick) {
+  return child()
+}
+
+com Text(text) {
+  return child()
+}
+
+let app = App(id = "ok") {
+  let { id, name } = item
+
+  Button(
+    onclick = () => out("clicked")
+  ) {
+    Text(text = "Click {id}")
+  }
+
+  if name == "Vut" {
+    Text(text = "name = {name}")
+  }
+
+  for i in 1..3 {
+    Text(text = "i = {i}")
+  }
+}
+
+out(app)

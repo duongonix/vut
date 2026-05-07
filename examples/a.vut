@@ -1,0 +1,12 @@
+let a = [1, 2, 3]
+let b = {a: 1}
+let c = 3
+let i = if c == 1 {
+  1
+} elif c == 2 {
+  2
+} else {
+  3
+}
+
+out(i)

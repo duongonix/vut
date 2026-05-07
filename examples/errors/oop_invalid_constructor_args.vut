@@ -1,0 +1,4 @@
+class Student(name) {
+}
+
+let s = Student()

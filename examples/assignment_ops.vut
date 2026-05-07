@@ -1,0 +1,32 @@
+let i = 1
+i++
+out(i)
+i += 3
+out(i)
+i *= 2
+out(i)
+i -= 4
+out(i)
+i /= 2
+out(i)
+i--
+out(i)
+
+let user = { score: 10 }
+user.score += 5
+out(user.score)
+user.score--
+out(user.score)
+
+let nums = [1, 2]
+nums[0] += 4
+out(nums[0])
+
+let update = () {
+  let n = 1
+  n++
+  n *= 5
+  return n
+}
+
+out(update())

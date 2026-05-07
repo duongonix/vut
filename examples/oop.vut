@@ -1,0 +1,48 @@
+class Human(name) {
+    kind = "human"
+
+    fn _init() {
+        out("Human created")
+    }
+
+    fn speak() {
+        out("hello {name}")
+    }
+}
+
+class Student(name, age): Human {
+    name = name
+    age = age
+    next_age = age + 1
+    _id = 1
+
+    fn _init() {
+        super._init()
+        out("Student created")
+    }
+
+    fn eat() {
+        out("{name} eating")
+    }
+
+    fn reveal() {
+        out(self._id)
+    }
+
+    fn rename(value) {
+        self.name = value
+    }
+}
+
+let s = Student("nam", 20)
+s.eat()
+s.speak()
+out(s.next_age)
+s.email = "a@gmail.com"
+out(s.email)
+let fn1 = s.eat
+fn1()
+s.reveal()
+s.rename("linh")
+s.eat()
+out(s._id)

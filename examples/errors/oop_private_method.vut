@@ -1,0 +1,8 @@
+class Student() {
+    fn _secret() {
+        out("secret")
+    }
+}
+
+let s = Student()
+s._secret()

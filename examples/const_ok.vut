@@ -1,0 +1,8 @@
+const answer = 42
+
+fn add(a, b) {
+    return a + b
+}
+
+out("answer = {answer}")
+out("sum = {add(2, 3)}")

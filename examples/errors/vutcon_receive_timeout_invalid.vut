@@ -1,0 +1,4 @@
+import vutcon at channel
+
+let ch = channel()
+ch.receive(timeout = "soon")

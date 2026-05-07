@@ -1,0 +1,17 @@
+/* top-level block comment
+   can span multiple lines
+   and contain tokens like let fake = 1
+*/
+let name = "vut"
+
+out(name.upper())
+
+let value = 1 /* inline block comment */ + 2
+out(value)
+
+/*
+fn ignored() {
+  out("nope")
+}
+*/
+out("done")

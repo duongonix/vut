@@ -1,0 +1,43 @@
+let value = 2
+
+if value == 1 {
+  out("one")
+} elif value == 2 {
+  out("two")
+} elif value == 3 {
+  out("three")
+} else {
+  out("other")
+}
+
+let pick = (value) {
+  if value == 1 {
+    return "one"
+  } elif value == 2 {
+    return "two"
+  } else {
+    return "other"
+  }
+}
+
+out(pick(3))
+
+com App(active) {
+  return child(active = active)
+}
+
+com Text(text) {
+  return child()
+}
+
+let app = App(active = false) {
+  if item.active {
+    Text(text = "active")
+  } elif value == 2 {
+    Text(text = "fallback")
+  } else {
+    Text(text = "inactive")
+  }
+}
+
+out(app)

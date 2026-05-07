@@ -1,0 +1,30 @@
+import vutcon at spawn, channel
+
+let jobs = channel()
+let results = channel()
+
+for i in 1..4 {
+    spawn(() {
+        while true {
+            let job = jobs.receive()
+
+            if job == "stop" {
+                break
+            }
+
+            results.send(job * 2)
+        }
+    })
+}
+
+for i in 1..10 {
+    jobs.send(i)
+}
+
+for i in 1..4 {
+    jobs.send("stop")
+}
+
+for i in 1..10 {
+    out(results.receive())
+}

@@ -1,0 +1,18 @@
+out(hello())
+out(countdown(3))
+
+fn hello() {
+  return message()
+}
+
+fn message() {
+  return "ok"
+}
+
+fn countdown(n) {
+  if n == 0 {
+    return 0
+  }
+
+  return countdown(n - 1)
+}

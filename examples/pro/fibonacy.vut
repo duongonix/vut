@@ -1,0 +1,46 @@
+fn fib_list(n) {
+    let result = []
+
+    let a = 0
+    let b = 1
+
+    result.push(a)
+    result.push(b)
+
+    for i in 2..n {
+        let temp = a + b
+
+        result.push(temp)
+
+        a = b
+        b = temp
+    }
+
+    return result
+}
+
+out(fib_list(10))
+
+
+
+
+fn fib(n) {
+    if n <= 1 {
+        return n
+    }
+
+    let a = 0
+    let b = 1
+
+    for i in 2..n {
+        let temp = a + b
+        a = b
+        b = temp
+    }
+
+    return b
+}
+
+for i in 0..10 {
+    out("fib({i}) = {fib(i)}")
+}

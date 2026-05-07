@@ -1,0 +1,8 @@
+class Student() {
+    fn call_parent() {
+        super._init()
+    }
+}
+
+let s = Student()
+s.call_parent()

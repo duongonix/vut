@@ -1,0 +1,3 @@
+import math
+
+out(math.add(1, 2))

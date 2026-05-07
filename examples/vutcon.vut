@@ -1,0 +1,31 @@
+import vutcon at spawn, channel, sleep, select
+
+let ch = channel()
+
+spawn(() {
+    sleep(20)
+    ch.send("hello from worker")
+})
+
+out(ch.receive())
+
+let quick = channel()
+let slow = channel()
+
+spawn(() {
+    sleep(30)
+    slow.send("slow")
+})
+
+spawn(() {
+    quick.send("quick")
+})
+
+select(() {
+    msg = quick.receive() => out(msg)
+    msg = slow.receive() => out(msg)
+    timeout 1000 => out("timeout")
+})
+
+let timeout_ch = channel()
+out(timeout_ch.receive(timeout = 10))

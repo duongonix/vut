@@ -1,0 +1,10 @@
+let i = 1
+
+for {
+  i = i + 1
+  out(i)
+
+  if i > 10 {
+    break
+  }
+}

@@ -1,0 +1,34 @@
+let value = 2
+
+let label = if value == 1 {
+  "one"
+} elif value == 2 {
+  "two"
+} else {
+  "other"
+}
+
+out(label)
+
+let computed = 10 + if value == 2 {
+  5
+} else {
+  1
+}
+
+out(computed)
+
+let empty = if false {
+  "nope"
+}
+
+out(empty)
+
+let from_block = if true {
+  let x = 3
+  x * 2
+} else {
+  0
+}
+
+out(from_block)

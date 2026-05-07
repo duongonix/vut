@@ -1,0 +1,78 @@
+let status = "ok"
+
+let label = match status {
+  "loading" => "Loading"
+  "ok" => {
+    out("matched ok")
+    "Done"
+  }
+  _ => "Unknown"
+}
+out(label)
+
+let code = 201
+let kind = match code {
+  200 | 201 | 204 => "success"
+  400 | 401 | 403 => "client"
+  _ => "unknown"
+}
+out(kind)
+
+let score = 95
+let grade = match score {
+  90..100 => "A"
+  80..89 => "B"
+  _ => "F"
+}
+out(grade)
+
+let value = 42
+let bound = match value {
+  0 => "zero"
+  x if x > 40 => "big {x}"
+  x => "value {x}"
+}
+out(bound)
+
+let user = { role: "admin", name: "Vut" }
+let role_label = match user {
+  { role: "admin", name } => "Admin {name}"
+  { role: "user", name } => "User {name}"
+  _ => "Unknown"
+}
+out(role_label)
+
+let point = [4, 5]
+let pos = match point {
+  [0, 0] => "origin"
+  [x, 0] => "x axis {x}"
+  [0, y] => "y axis {y}"
+  [x, y] => "{x}, {y}"
+}
+out(pos)
+
+com App() {
+  return child()
+}
+
+com Loading() {
+  return child()
+}
+
+com Content() {
+  return child()
+}
+
+com Empty() {
+  return child()
+}
+
+let view = "success"
+let app = App {
+  match view {
+    "loading" => Loading()
+    "success" => Content()
+    _ => Empty()
+  }
+}
+out(app)

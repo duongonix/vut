@@ -1,0 +1,53 @@
+let user = {
+  name: "Vut",
+  age: 10,
+  profile: {
+    username: "duong",
+    name: null
+  },
+  pair: [7, 8]
+}
+
+let { name, age } = user
+out(name)
+out(age)
+
+let { name: username } = user
+out(username)
+
+let { country = "VN" } = user
+out(country)
+
+let {
+  profile: {
+    username: nested_username,
+    name = "guest"
+  }
+} = user
+out(nested_username)
+out(name)
+
+let point = [10, 20]
+let [x, y] = point
+out(x)
+out(y)
+
+let [a, [b, c]] = [1, [2, 3]]
+out(a)
+out(b)
+out(c)
+
+let [fallback = 99] = []
+out(fallback)
+
+let {
+  pair: [left, right]
+} = user
+out(left)
+out(right)
+
+let get_total = () {
+  let [first, second] = [4, 5]
+  return first + second
+}
+out(get_total())

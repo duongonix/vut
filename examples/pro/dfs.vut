@@ -1,0 +1,102 @@
+fn can_place(board, row, col, num) {
+    let i = 0
+
+    while i < 9 {
+        if board[row][i] == num {
+            return false
+        }
+
+        if board[i][col] == num {
+            return false
+        }
+
+        i = i + 1
+    }
+
+    let box_row = (row / 3).floor() * 3
+    let box_col = (col / 3).floor() * 3
+
+    let r = box_row
+
+    while r < box_row + 3 {
+        let c = box_col
+
+        while c < box_col + 3 {
+            if board[r][c] == num {
+                return false
+            }
+
+            c = c + 1
+        }
+
+        r = r + 1
+    }
+
+    return true
+}
+fn solve_sudoku(board) {
+    let rows = []
+    let cols = []
+    let guesses = []
+
+    for row in 0..8 {
+        for col in 0..8 {
+            if board[row][col] == 0 {
+                rows.push(row)
+                cols.push(col)
+                guesses.push(0)
+            }
+        }
+    }
+
+    let index = 0
+
+    while index >= 0 && index < rows.len() {
+        let row = rows[index]
+        let col = cols[index]
+        let num = guesses[index] + 1
+        let found = false
+
+        board[row][col] = 0
+
+        while num <= 9 {
+            if can_place(board, row, col, num) {
+                board[row][col] = num
+                guesses[index] = num
+                found = true
+                break
+            }
+
+            num = num + 1
+        }
+
+        if found {
+            index = index + 1
+        } else {
+            guesses[index] = 0
+            board[row][col] = 0
+            index = index - 1
+        }
+    }
+
+    return {
+        solved: index == rows.len(),
+        board: board
+    }
+}
+
+let board = [
+    [5,3,0,0,7,0,0,0,0],
+    [6,0,0,1,9,5,0,0,0],
+    [0,9,8,0,0,0,0,6,0],
+    [8,0,0,0,6,0,0,0,3],
+    [4,0,0,8,0,3,0,0,1],
+    [7,0,0,0,2,0,0,0,6],
+    [0,6,0,0,0,0,2,8,0],
+    [0,0,0,4,1,9,0,0,5],
+    [0,0,0,0,8,0,0,7,9]
+]
+
+let result = solve_sudoku(board)
+out(result.solved)
+out(result.board)

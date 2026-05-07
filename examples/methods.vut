@@ -1,0 +1,29 @@
+let name = "vut"
+out(name.upper())
+out(name.len())
+let upper = name.upper
+out(upper())
+out(" vut ".trim().upper())
+out("hello".contains("ell"))
+
+let nums = [1, 2]
+let pushed = nums.push(3)
+out(nums.len())
+out(nums.pop())
+out(nums.len())
+out(nums.is_empty())
+
+let x = -10
+out(x.abs())
+out(2.round())
+out(2.floor())
+out(2.ceil())
+
+let user = { name: "Vut", kind: "lang" }
+out(user.name)
+user.name = "VutLang"
+out(user.name)
+out(user.has("kind"))
+out(user.get("missing"))
+
+out(" hello ".trim().upper().len())

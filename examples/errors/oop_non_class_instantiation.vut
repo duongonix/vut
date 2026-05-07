@@ -1,0 +1,2 @@
+let Student = 1
+let s = Student()
