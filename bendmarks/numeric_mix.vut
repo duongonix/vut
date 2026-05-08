@@ -1,0 +1,8 @@
+let total = 0
+for i in 1..500000 {
+  total += i
+  total -= 1
+  total *= 2
+  total /= 2
+}
+out(total)

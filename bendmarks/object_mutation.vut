@@ -1,0 +1,8 @@
+let state = { count: 0, bonus: 3 }
+
+for i in 1..250000 {
+  state.count += i
+  state.count -= state.bonus
+}
+
+out(state.count)

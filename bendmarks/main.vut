@@ -1,0 +1,5 @@
+let hello_world = 0
+for i in 0..1000000 {
+  hello_world += i
+}
+out(hello_world)

@@ -1,0 +1,67 @@
+import http
+import http at request, get, post, put, patch, delete
+
+let base = "https://httpbin.org"
+
+let get_res = get("{base}/get", {
+    headers: {
+        Accept: "application/json"
+    },
+    timeout: 10000,
+    follow_redirects: true
+})
+out(get_res.status)
+out(get_res.ok)
+out(get_res.method)
+out(get_res.url.contains("/get"))
+out(get_res.headers.has("content-type"))
+out(get_res.body.contains("httpbin"))
+
+let post_res = post("{base}/post", "{\"name\":\"Vut\"}", {
+    headers: {
+        "Content-Type": "application/json"
+    },
+    timeout: 10000
+})
+out(post_res.status)
+out(post_res.ok)
+out(post_res.method)
+out(post_res.body.contains("Vut"))
+
+let put_res = put("{base}/put", "put body", {
+    timeout: 10000
+})
+out(put_res.status)
+out(put_res.method)
+out(put_res.body.contains("put body"))
+
+let patch_res = patch("{base}/patch", "patch body", {
+    timeout: 10000
+})
+out(patch_res.status)
+out(patch_res.method)
+out(patch_res.body.contains("patch body"))
+
+let delete_res = delete("{base}/delete", {
+    timeout: 10000
+})
+out(delete_res.status)
+out(delete_res.method)
+out(delete_res.ok)
+
+let req_res = request({
+    method: "POST",
+    url: "{base}/anything",
+    headers: {
+        Accept: "application/json",
+        "X-Vut-Example": "yes"
+    },
+    body: "request body",
+    timeout: 10000,
+    follow_redirects: false
+})
+out(req_res.status)
+out(req_res.ok)
+out(req_res.method)
+out(req_res.body.contains("request body"))
+out(req_res.body.contains("X-Vut-Example"))

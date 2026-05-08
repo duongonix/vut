@@ -1,0 +1,8 @@
+let total = 0
+for i in 1..700 {
+  for j in 1..700 {
+    total += i
+    total += j
+  }
+}
+out(total)

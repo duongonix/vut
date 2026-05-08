@@ -1,0 +1,12 @@
+let checksum = 0
+for round in 1..20000 {
+  let a = 0
+  let b = 1
+  for i in 2..35 {
+    let next = a + b
+    a = b
+    b = next
+  }
+  checksum += b
+}
+out(checksum)

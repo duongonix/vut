@@ -1,0 +1,10 @@
+let values = []
+for i in 0..6000 {
+  values.push(i)
+}
+
+let total = 0
+for value in values {
+  total += value
+}
+out(total)

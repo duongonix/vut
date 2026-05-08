@@ -1,0 +1,61 @@
+import fs
+import fs at read, write, append, exists, is_file, is_dir
+
+let root = fs.join("target", "fs-example")
+let nested = fs.join(root, "nested")
+let note = fs.join(nested, "note.txt")
+let copy_path = fs.join(root, "note-copy.txt")
+let moved_path = fs.join(root, "note-moved.txt")
+
+
+
+if fs.exists(root) {
+    fs.remove_all(root)
+}
+
+fs.mkdir_all(nested)
+out(is_dir(root))
+out(is_dir(nested))
+
+write(note, "Hello")
+append(note, " from fs\n")
+append(note, "Second line")
+
+out(exists(note))
+out(is_file(note))
+out(read(note))
+
+fs.copy(note, copy_path)
+fs.move(copy_path, moved_path)
+out(fs.exists(copy_path))
+out(fs.exists(moved_path))
+
+let items = fs.list(root)
+out(items.len())
+
+let meta = fs.metadata(moved_path)
+out(meta.path.contains("note-moved.txt"))
+out(meta.is_file)
+out(meta.is_dir)
+out(meta.size > 0)
+out(type(meta.created))
+out(type(meta.modified))
+out(meta.readonly)
+
+out(fs.basename(moved_path))
+out(fs.dirname(moved_path).contains("fs-example"))
+out(fs.extname(moved_path))
+out(fs.stem(moved_path))
+out(fs.normalize(fs.join(root, fs.join("..", "fs-example"))).contains("fs-example"))
+out(fs.absolute(moved_path).contains("note-moved.txt"))
+
+let before = fs.cwd()
+out(before.len() > 0)
+out(type(fs.home()))
+out(fs.temp_dir().len() > 0)
+
+fs.chdir(root)
+out(fs.cwd().contains("fs-example"))
+fs.chdir(before)
+out(fs.cwd() == before)
+
