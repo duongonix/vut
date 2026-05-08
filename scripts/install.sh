@@ -2,7 +2,23 @@
 set -euo pipefail
 
 REPO="duongonix/vut"
-VERSION="${VUT_VERSION:-v0.1.1}"
+
+# Tự động lấy version mới nhất nếu không có biến môi trường VUT_VERSION
+if [ -z "${VUT_VERSION:-}" ]; then
+  echo "Fetching latest version from GitHub..."
+  # Sử dụng curl để lấy tag_name từ GitHub API
+  LATEST_VERSION=$(curl -s "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+  
+  if [ -n "$LATEST_VERSION" ]; then
+    VERSION="$LATEST_VERSION"
+    echo "Latest version found: $VERSION"
+  else
+    echo "Warning: Could not fetch latest version, falling back to v0.1.1"
+    VERSION="v0.1.1"
+  fi
+else
+  VERSION="$VUT_VERSION"
+fi
 
 VUT_HOME="${VUT_HOME:-$HOME/.vut}"
 INSTALL_DIR="${VUT_INSTALL_DIR:-$VUT_HOME/bin}"
@@ -76,7 +92,7 @@ if [ ! -f "$VUT_HOME/config.toml" ]; then
 home = "$VUT_HOME"
 
 [paths]
-bin = "$VUT_HOME/bin"
+bin = "$INSTALL_DIR"
 std = "$VUT_HOME/std"
 packages = "$VUT_HOME/packages"
 cache = "$VUT_HOME/cache"
@@ -95,7 +111,7 @@ elif command -v wget >/dev/null 2>&1; then
   wget -O "$ASSET" "$URL"
   wget -O "$ASSET.sha256" "$SHA_URL"
 else
-  echo "curl or wget is required"
+  echo "Error: curl or wget is required"
   exit 1
 fi
 
@@ -106,7 +122,7 @@ if command -v sha256sum >/dev/null 2>&1; then
 elif command -v shasum >/dev/null 2>&1; then
   shasum -a 256 -c "$ASSET.sha256"
 else
-  echo "No checksum tool found, skipping verification"
+  echo "Warning: No checksum tool found, skipping verification"
 fi
 
 echo "Extracting..."
@@ -115,45 +131,34 @@ if [ "$EXT" = "zip" ]; then
   if command -v unzip >/dev/null 2>&1; then
     unzip -o "$ASSET" -d "$INSTALL_DIR"
   else
-    echo "unzip is required for Windows zip package"
+    echo "Error: unzip is required for Windows zip package"
     exit 1
   fi
 else
   tar -xzf "$ASSET" -C "$INSTALL_DIR"
 fi
 
+# Cấp quyền thực thi cho các file binary
 chmod +x "$INSTALL_DIR/vut" 2>/dev/null || true
 chmod +x "$INSTALL_DIR/vpm" 2>/dev/null || true
 
 echo ""
 echo "Vut installed successfully."
-echo ""
-echo "Installed files:"
-echo "  $INSTALL_DIR/vut"
-echo "  $INSTALL_DIR/vpm"
-echo ""
-echo "Vut home structure:"
-echo "  $VUT_HOME/bin"
-echo "  $VUT_HOME/std"
-echo "  $VUT_HOME/packages"
-echo "  $VUT_HOME/cache"
-echo "  $VUT_HOME/registry"
-echo "  $VUT_HOME/config.toml"
+echo "---------------------------"
+echo "Binaries:    $INSTALL_DIR"
+echo "Config:      $VUT_HOME/config.toml"
 echo ""
 
 case ":$PATH:" in
   *":$INSTALL_DIR:"*)
-    echo "PATH already contains:"
-    echo "  $INSTALL_DIR"
+    echo "PATH already contains the installation directory."
     ;;
   *)
-    echo "Add this to your shell config:"
+    echo "Add this to your shell profile (.bashrc, .zshrc, etc.):"
     echo ""
     echo "  export PATH=\"$INSTALL_DIR:\$PATH\""
     echo ""
     ;;
 esac
 
-echo "Test:"
-echo "  vut --version"
-echo "  vpm --version"
+echo "Run 'vut --version' to verify."
