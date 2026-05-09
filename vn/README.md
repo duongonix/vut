@@ -21,7 +21,7 @@ Vut là ngôn ngữ thông dịch viết bằng Rust. Vut hướng đến cú ph
 
 ## Các mảng chính
 
-- Thư viện chuẩn: [fs](thu-vien-chuan/fs.md), [vutcon](thu-vien-chuan/vutcon.md), [std](thu-vien-chuan/std.md)
+- Thư viện chuẩn: [fs](thu-vien-chuan/fs.md), [vutcon](thu-vien-chuan/vutcon.md), [std](thu-vien-chuan/std.md), [json](thu-vien-chuan/json.md), [env](thu-vien-chuan/env.md), [http](thu-vien-chuan/http.md),
 - VutCom: [giới thiệu](vutcom/gioi-thieu.md), [component](vutcom/component.md), [child](vutcom/child.md), [rendering](vutcom/rendering.md)
 - Package manager: [VPM](quan-ly-package/vpm.md), [dependencies](quan-ly-package/dependencies.md), local/git/official packages
 - Native: [Rust native](native/rust-native.md), [plugin](native/plugin.md), [FFI](native/ffi.md)

@@ -4,60 +4,23 @@
 
 Trang này hướng dẫn cách build hai CLI chính của Vut: `vut` để chạy chương trình và `vpm` để quản lý package.
 
-## Yêu cầu
-
-- Rust stable
-- Cargo
-- Git nếu dùng package từ GitHub
-
-Kiểm tra:
+# for Windows
 
 ```powershell
-rustc --version
-cargo --version
-git --version
+irm https://raw.githubusercontent.com/duongonix/vut/main/scripts/install.ps1 | iex
 ```
 
-## Build từ source
+# for Linux/MacOS
 
-Trong thư mục repo:
-
+curl
 ```powershell
-cargo build -p vut -p vpm --release
+curl -fsSL https://raw.githubusercontent.com/duongonix/vut/main/scripts/install.sh | bash
 ```
 
-Kết quả:
-
-```text
-target/release/vut
-target/release/vpm
-```
-
-Trên Windows:
-
-```text
-target/release/vut.exe
-target/release/vpm.exe
-```
-
-## Kiểm tra cài đặt
-
+wget
 ```powershell
-target/release/vut --version
-target/release/vpm --version
+wget -qO- https://raw.githubusercontent.com/duongonix/vut/main/scripts/install.sh | bash
 ```
-
-## Cài vào PATH
-
-Bạn có thể copy hai binary vào thư mục đã nằm trong `PATH`, hoặc thêm `target/release` vào `PATH` trong môi trường dev.
-
-## Release đa nền tảng
-
-Repo có GitHub Actions workflow build cho Windows, Linux, macOS Intel và macOS Apple Silicon. Khi push tag dạng `v0.1.0`, workflow sẽ tạo GitHub Release kèm artifact.
-
-## Ghi chú
-
-Vut chưa yêu cầu runtime ngoài binary. Native plugin có thể cần dynamic library `.dll`, `.so`, hoặc `.dylib` đi kèm package.
 
 
 
