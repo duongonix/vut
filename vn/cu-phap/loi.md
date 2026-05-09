@@ -56,3 +56,13 @@ error[E8001]: file not found `missing.txt`
 - Khi báo bug, gửi source file tối thiểu gây lỗi.
 - Đừng bỏ qua `help:`; nhiều lỗi đã có gợi ý sửa trực tiếp.
 
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [thu-vien-chuan/std.md](../thu-vien-chuan/std.md)
+

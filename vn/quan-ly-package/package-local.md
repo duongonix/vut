@@ -39,3 +39,14 @@ local_lib.run()
 ## Best practices
 
 Dùng relative path ngắn và ổn định. Nếu package đã sẵn sàng chia sẻ cho team, chuyển sang Git dependency để đường dẫn không phụ thuộc vào máy cá nhân.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [quan-ly-package/package-git.md](../quan-ly-package/package-git.md)
+

@@ -1,0 +1,10 @@
+import json
+
+let text = "{\"name\":\"Vut\",\"count\":2,\"active\":true}"
+let data = json.parse(text)
+
+out(data.name)
+out(data.count)
+out(data.active)
+out(json.stringify(data))
+out(json.pretty(data))

@@ -59,3 +59,15 @@ Repo có GitHub Actions workflow build cho Windows, Linux, macOS Intel và macOS
 
 Vut chưa yêu cầu runtime ngoài binary. Native plugin có thể cần dynamic library `.dll`, `.so`, hoặc `.dylib` đi kèm package.
 
+
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [bat-dau/chuong-trinh-dau-tien.md](./chuong-trinh-dau-tien.md)
+

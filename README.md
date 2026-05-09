@@ -50,25 +50,24 @@ Vut aims to be smaller than Python, less browser-oriented than JavaScript, and l
 
 ## Installation
 
-Build both CLIs from source:
+# for Windows
 
 ```powershell
-cargo build -p vut -p vpm --release
+irm https://raw.githubusercontent.com/duongonix/vut/main/scripts/install.ps1 | iex
 ```
 
-The binaries are created under:
+# for Linux/MacOS
 
-```text
-target/release/vut
-target/release/vpm
+curl
+```powershell
+curl -fsSL https://raw.githubusercontent.com/duongonix/vut/main/scripts/install.sh | bash
 ```
 
-On Windows they are:
-
-```text
-target/release/vut.exe
-target/release/vpm.exe
+wget
+```powershell
+wget -qO- https://raw.githubusercontent.com/duongonix/vut/main/scripts/install.sh | bash
 ```
+
 
 For releases, the project includes a GitHub Actions workflow that builds archives for:
 

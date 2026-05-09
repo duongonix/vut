@@ -105,3 +105,13 @@ class Student(name, age): Human {
 - Dùng `self.field` khi muốn đọc/ghi field rõ ràng trong method.
 - Không lạm dụng inheritance; ưu tiên object đơn giản nếu đủ.
 
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [cu-phap/module.md](../cu-phap/module.md)
+

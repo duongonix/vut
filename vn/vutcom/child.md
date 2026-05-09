@@ -50,3 +50,14 @@ Button(
 ## Best practices
 
 Dùng `child(...)` thay vì tự tạo object tree thủ công. Giữ props của `child` nhỏ và có ý nghĩa. Với dữ liệu động, tính giá trị trước rồi truyền vào named argument để block dễ đọc.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [vutcom/rendering.md](../vutcom/rendering.md)
+

@@ -209,3 +209,14 @@ Nhóm lỗi concurrency dùng `E6100`:
 ## Best practices
 
 Ưu tiên gửi message qua channel. Tránh chia sẻ object mutable giữa nhiều task nếu không thật sự cần. Với worker chạy lâu, gửi message `"stop"` hoặc một object command rõ ràng để task tự kết thúc.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [vutcom/gioi-thieu.md](../vutcom/gioi-thieu.md)
+

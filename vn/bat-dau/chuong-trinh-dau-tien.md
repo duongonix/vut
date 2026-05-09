@@ -53,3 +53,13 @@ vpm run
 - Dùng `out()` để debug bước đầu.
 - Khi gặp lỗi, đọc phần `help:` trong diagnostic trước.
 
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [bat-dau/cau-truc-du-an.md](../bat-dau/cau-truc-du-an.md)
+

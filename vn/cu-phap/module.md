@@ -65,3 +65,13 @@ Vut ưu tiên:
 - Dùng `mod.vut` cho package/folder có nhiều file con.
 - Tránh circular import.
 
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [cu-phap/import.md](../cu-phap/import.md)
+

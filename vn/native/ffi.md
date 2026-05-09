@@ -41,3 +41,14 @@ Native code có thể crash nếu viết sai, vì vậy boundary phải validate
 ## Best practices
 
 Giữ ABI version rõ ràng. Không truyền reference sống lâu qua boundary nếu ownership chưa được định nghĩa. Với dữ liệu phức tạp, ưu tiên object/array VutValue thay vì pointer raw.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [vi-du/cli.md](../vi-du/cli.md)
+

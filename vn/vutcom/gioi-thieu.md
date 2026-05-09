@@ -92,3 +92,14 @@ let app = App {
 ## Best practices
 
 Giữ component nhỏ và rõ trách nhiệm. Dùng named arguments cho event handler và props quan trọng. Không tự viết object tree thủ công nếu runtime VutCom đã có thể build giúp bạn.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [vutcom/component.md](../vutcom/component.md)
+

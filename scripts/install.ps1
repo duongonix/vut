@@ -1,7 +1,21 @@
 $ErrorActionPreference = "Stop"
 
 $Repo = "duongonix/vut"
-$Version = if ($env:VUT_VERSION) { $env:VUT_VERSION } else { "v0.1.1" }
+
+# Tự động lấy version mới nhất từ GitHub API nếu không có biến môi trường
+if ($env:VUT_VERSION) {
+    $Version = $env:VUT_VERSION
+} else {
+    try {
+        Write-Host "Fetching latest version from GitHub..." -ForegroundColor Cyan
+        $ReleaseInfo = Invoke-RestMethod -Uri "https://api.github.com/repos/$Repo/releases/latest" -UseBasicParsing
+        $Version = $ReleaseInfo.tag_name
+        Write-Host "Latest version found: $Version"
+    } catch {
+        Write-Warning "Could not fetch latest version, falling back to v0.1.1"
+        $Version = "v0.1.1"
+    }
+}
 
 $VutHome = if ($env:VUT_HOME) {
     $env:VUT_HOME
@@ -27,7 +41,7 @@ $ShaUrl = "$Url.sha256"
 
 $TempDir = Join-Path $env:TEMP ("vut-install-" + [Guid]::NewGuid().ToString())
 
-Write-Host "Installing Vut $Version"
+Write-Host "Installing Vut $Version" -ForegroundColor Green
 Write-Host "Platform: $Platform-$Arch"
 Write-Host "Vut home: $VutHome"
 Write-Host "Install dir: $InstallDir"
@@ -50,14 +64,14 @@ try {
     if (!(Test-Path $ConfigPath)) {
         @"
 [global]
-home = "$VutHome"
+home = "$($VutHome -replace '\\', '/')"
 
 [paths]
-bin = "$InstallDir"
-std = "$($VutHome)\std"
-packages = "$($VutHome)\packages"
-cache = "$($VutHome)\cache"
-registry = "$($VutHome)\registry"
+bin = "$($InstallDir -replace '\\', '/')"
+std = "$($VutHome -replace '\\', '/')/std"
+packages = "$($VutHome -replace '\\', '/')/packages"
+cache = "$($VutHome -replace '\\', '/')/cache"
+registry = "$($VutHome -replace '\\', '/')/registry"
 "@ | Set-Content -Encoding UTF8 $ConfigPath
     }
 
@@ -77,23 +91,18 @@ registry = "$($VutHome)\registry"
     $ActualHash = (Get-FileHash $ZipPath -Algorithm SHA256).Hash.ToLower()
 
     if ($ExpectedHash -ne $ActualHash) {
-        Write-Error "Checksum mismatch. Expected $ExpectedHash but got $ActualHash"
+        throw "Checksum mismatch. Expected $ExpectedHash but got $ActualHash"
     }
 
     Write-Host "Extracting..."
-
+    # Force giải nén để ghi đè nếu đã tồn tại
     Expand-Archive -Path $ZipPath -DestinationPath $InstallDir -Force
 
     $VutExe = Join-Path $InstallDir "vut.exe"
     $VpmExe = Join-Path $InstallDir "vpm.exe"
 
-    if (!(Test-Path $VutExe)) {
-        Write-Error "vut.exe was not found after extraction"
-    }
-
-    if (!(Test-Path $VpmExe)) {
-        Write-Error "vpm.exe was not found after extraction"
-    }
+    if (!(Test-Path $VutExe)) { throw "vut.exe was not found after extraction" }
+    if (!(Test-Path $VpmExe)) { throw "vpm.exe was not found after extraction" }
 
     Write-Host "Adding Vut to user PATH..."
 
@@ -107,29 +116,24 @@ registry = "$($VutHome)\registry"
         }
 
         [Environment]::SetEnvironmentVariable("Path", $NewPath, "User")
-
         $env:Path = "$env:Path;$InstallDir"
-
-        Write-Host "PATH updated."
+        Write-Host "PATH updated." -ForegroundColor Yellow
     } else {
         Write-Host "PATH already contains Vut install dir."
     }
 
     Write-Host ""
-    Write-Host "Vut installed successfully."
+    Write-Host "Vut installed successfully!" -ForegroundColor Green
+    Write-Host "---------------------------"
+    Write-Host "Vut executable: $VutExe"
+    Write-Host "Vpm executable: $VpmExe"
+    Write-Host "Vut config:     $ConfigPath"
     Write-Host ""
-    Write-Host "Installed files:"
-    Write-Host "  $VutExe"
-    Write-Host "  $VpmExe"
-    Write-Host ""
-    Write-Host "Vut home:"
-    Write-Host "  $VutHome"
-    Write-Host ""
-    Write-Host "Test:"
-    Write-Host "  vut --version"
-    Write-Host "  vpm --version"
-    Write-Host ""
-    Write-Host "If commands are not recognized, close and reopen PowerShell."
+    Write-Host "Test by running: vut --version"
+    Write-Host "Note: You might need to restart your terminal for PATH changes to take effect."
+}
+catch {
+    Write-Error "Installation failed: $($_.Exception.Message)"
 }
 finally {
     if (Test-Path $TempDir) {

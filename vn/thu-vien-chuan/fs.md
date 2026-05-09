@@ -206,3 +206,14 @@ Nhóm lỗi chính:
 ## Best practices
 
 Ưu tiên `fs.join` thay vì tự nối chuỗi path để code chạy tốt trên Windows, Linux và macOS. Kiểm tra `exists`, `is_file`, `is_dir` trước các thao tác nguy hiểm nếu lỗi không phải một phần của flow bình thường. Với tool build hoặc CLI, nên ghi file vào `target/`, `.vendor/` hoặc thư mục cấu hình rõ ràng thay vì ghi lung tung ở root project.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [thu-vien-chuan/vutcon.md](../thu-vien-chuan/vutcon.md)
+

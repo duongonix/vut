@@ -77,3 +77,14 @@ vpm build
 ## Best practices
 
 Giữ API native nhỏ và ổn định. Validate argument rõ ràng và trả diagnostic thay vì panic. Chỉ dùng native khi Vut thuần không đủ nhanh hoặc cần gọi hệ thống ngoài runtime.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [native/plugin.md](../native/plugin.md)
+

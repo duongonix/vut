@@ -38,3 +38,14 @@ Resolution ưu tiên local project trước dependency/std. Vì vậy module tro
 ## Best practices
 
 Giữ dependency nhỏ và rõ nguồn. Ưu tiên lock file trong app. Khi viết thư viện, tránh phụ thuộc quá nhiều package không cần thiết để người dùng import nhẹ hơn.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [quan-ly-package/package-local.md](../quan-ly-package/package-local.md)
+

@@ -57,3 +57,14 @@ VutCom không yêu cầu `main()`. Bạn có thể build tree ở top-level gi�
 ## Best practices
 
 Giữ render deterministic: cùng props nên tạo cùng tree. Tránh side effect khó đoán trong render block, ngoại trừ event handler dạng lambda sẽ chạy khi event xảy ra.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [quan-ly-package/vpm.md](../quan-ly-package/vpm.md)
+

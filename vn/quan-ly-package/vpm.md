@@ -85,3 +85,14 @@ Git dependency trực tiếp được cài vào:
 ## Best practices
 
 Commit `vpm.toml` và `vpm-lock.toml` để build reproducible. Không commit `.vendor/` và `target/` nếu project không có lý do đặc biệt. Dùng package local khi đang phát triển nhiều package cùng lúc, sau đó chuyển sang Git hoặc package chính thức khi publish.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [quan-ly-package/dependencies.md](../quan-ly-package/dependencies.md)
+

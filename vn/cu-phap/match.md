@@ -77,3 +77,13 @@ let node = match status {
 - Luôn có `_` nếu dữ liệu có thể mở rộng.
 - Dùng guard cho điều kiện bổ sung, không nhét logic quá dài vào pattern.
 
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [cu-phap/oop.md](../cu-phap/oop.md)
+

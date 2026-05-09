@@ -46,3 +46,14 @@ for i in 1..10 {
 ## Best practices
 
 Gửi command dừng rõ ràng như `"stop"`. Tránh shared mutable state. Nếu cần timeout, dùng `receive(timeout = 1000)` hoặc `select(() { ... })`.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [vi-du/game.md](../vi-du/game.md)
+

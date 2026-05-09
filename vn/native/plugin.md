@@ -46,3 +46,14 @@ Lỗi native/plugin thuộc nhóm `E7000`, ví dụ ABI không tương thích, k
 ## Best practices
 
 Tài liệu plugin nên có phần cài đặt, ví dụ import, danh sách API public và platform hỗ trợ. Không expose chi tiết nội bộ nếu chưa ổn định.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [native/ffi.md](../native/ffi.md)
+

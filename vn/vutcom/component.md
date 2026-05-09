@@ -61,3 +61,14 @@ com Status(status) {
 ## Best practices
 
 Đặt tên component bằng PascalCase. Dùng props rõ nghĩa như `text`, `onclick`, `value`, `items`. Tránh nhồi quá nhiều logic vào component render; nếu cần tính toán dài, tách thành function thường.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [vutcom/child.md](../vutcom/child.md)
+

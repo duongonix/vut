@@ -1,7 +1,7 @@
 fn is_safe(cols, row, col) {
     let r = 0
 
-    while r < row {
+    for r < row  {
         let c = cols[r]
 
         if c == col {
@@ -26,12 +26,12 @@ fn solve(cols, row, n) {
     let count = 0
     let current_row = row
 
-    while current_row >= 0 {
+    for current_row >= 0  {
         cols[current_row] = cols[current_row] + 1
 
         let placed = false
 
-        while cols[current_row] < n {
+    for cols[current_row] < n  {
             if is_safe(cols, current_row, cols[current_row]) {
                 placed = true
                 break

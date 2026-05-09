@@ -1,7 +1,7 @@
 fn can_place(board, row, col, num) {
     let i = 0
 
-    while i < 9 {
+    for i < 9 {
         if board[row][i] == num {
             return false
         }
@@ -18,10 +18,10 @@ fn can_place(board, row, col, num) {
 
     let r = box_row
 
-    while r < box_row + 3 {
+    for r < box_row + 3 {
         let c = box_col
 
-        while c < box_col + 3 {
+        for c < box_col + 3 {
             if board[r][c] == num {
                 return false
             }
@@ -51,7 +51,7 @@ fn solve_sudoku(board) {
 
     let index = 0
 
-    while index >= 0 && index < rows.len() {
+    for index >= 0 && index < rows.len() {
         let row = rows[index]
         let col = cols[index]
         let num = guesses[index] + 1
@@ -59,7 +59,7 @@ fn solve_sudoku(board) {
 
         board[row][col] = 0
 
-        while num <= 9 {
+        for num <= 9 {
             if can_place(board, row, col, num) {
                 board[row][col] = num
                 guesses[index] = num

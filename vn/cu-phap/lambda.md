@@ -56,3 +56,13 @@ Vì block trực tiếp có thể conflict với VutCom.
 - Dùng arrow lambda cho biểu thức ngắn.
 - Với callback phức tạp, cân nhắc tách ra `fn` có tên.
 
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [cu-phap/dieu-kien.md](../cu-phap/dieu-kien.md)
+

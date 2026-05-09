@@ -39,3 +39,14 @@ let app = App {
 ## Best practices
 
 Dùng named arguments cho props. Giữ component nhỏ. Tách logic dài ra function thường để render block dễ nhìn.
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [vi-du/concurrency.md](../vi-du/concurrency.md)
+

@@ -70,3 +70,14 @@ Giữ import ở đầu file. Dùng namespace cho module có nhiều function đ
 - [fs](./fs.md)
 - [vutcon](./vutcon.md)
 - [Import](../cu-phap/import.md)
+
+## Mo rong thuc hanh
+
+- Chay lai vi du trong bai voi nhieu input khac nhau de nam chac hanh vi.
+- Tach logic thanh ham/module nho de de test va tai su dung.
+- Thu tao 1 tinh huong loi co chu dich de hieu thong diep chan doan cua Vut.
+
+## Bai ke tiep
+
+- [thu-vien-chuan/fs.md](../thu-vien-chuan/fs.md)
+
