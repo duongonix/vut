@@ -130,6 +130,7 @@ registry = "$($VutHome -replace '\\', '/')/registry"
     Write-Host "Vut config:     $ConfigPath"
     Write-Host ""
     Write-Host "Test by running: vut --version"
+    Write-Host "Test by running: vpm --version"
     Write-Host "Note: You might need to restart your terminal for PATH changes to take effect."
 }
 catch {

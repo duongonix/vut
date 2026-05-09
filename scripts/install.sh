@@ -147,6 +147,8 @@ echo "Vut installed successfully."
 echo "---------------------------"
 echo "Binaries:    $INSTALL_DIR"
 echo "Config:      $VUT_HOME/config.toml"
+echo "Test by running: vut --version"
+echo "Test by running: vpm --version"
 echo ""
 
 case ":$PATH:" in
