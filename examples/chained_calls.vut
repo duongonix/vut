@@ -1,0 +1,26 @@
+# Chained calls: a call's result may itself be called when it has a function
+# type. Each postfix call level is type-checked independently.
+fn double(x: int) -> int:
+  x * 2
+
+fn make_named() -> fn(int) -> int:
+  double
+
+fn lift() -> fn(int) -> fn(int) -> int:
+  fn(a):
+    fn(b):
+      b + 1
+
+data Holder:
+  op: fn(int) -> int
+
+fn main():
+  named = make_named()(21)
+  out("named=$named")
+
+  deep = lift()(9)(4)
+  out("deep=$deep")
+
+  holder = Holder(op: double)
+  field = holder.op(5)
+  out("field=$field")

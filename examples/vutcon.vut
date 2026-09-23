@@ -1,0 +1,48 @@
+# Vutcon: lightweight concurrent execution units.
+#
+# `vut(<callable>)` spawns a Vutcon, `vutcon[T]` is its typed handle, and
+# `await handle` suspends until it completes. This phase runs all Vutcons on a
+# single-thread scheduler; the surface syntax stays fixed for a future M:N pool.
+
+data Pair:
+  label: str
+  value: int
+
+fn make_pair() -> Pair:
+  Pair(label: "p", value: 7)
+
+fn load() -> result[int, int]:
+  ok(5)
+
+fn compute_once() -> int:
+  20
+
+async fn compute() -> result[int, int]:
+  job: vutcon[result[int, int]] = vut(() => load())
+  inner = await job?
+  ok(inner + 1)
+
+async fn main():
+  # One-line and multiline callbacks.
+  a = vut(() => compute_once())
+  b = vut(fn():
+    value = compute_once()
+    value * 2
+  )
+  x = await a
+  y = await b
+  out("a=$x b=$y")
+
+  # An aggregate result typed through the handle.
+  p: vutcon[Pair] = vut(() => make_pair())
+  pair = await p
+  out("pair=$(pair.label)=$(pair.value)")
+
+  # A result-typed handle with `?` propagation.
+  match await compute():
+    ok(v): out("ok=$v")
+    err(e): out("err=$e")
+
+  # Discarding a handle cancels the Vutcon: the body never runs.
+  vut(() => compute_once())
+  out("done")

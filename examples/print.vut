@@ -1,0 +1,30 @@
+# Direct printing of values.
+#
+# `out`/`print` accept any displayable value directly: variables, scalars,
+# lists, arrays, `data`, enums, and `result`. Multiple arguments are joined by
+# single spaces. The compiler generates the textual form; there is no
+# reflection and no runtime type metadata.
+
+data User:
+  name: str
+  age: int
+
+enum Role:
+  admin
+  guest(label: str)
+
+fn main():
+  user = User(name: "ann", age: 30)
+  out(user)
+  out("welcome $user")
+
+  scores = @[10, 20, 30]
+  out("scores:", scores)
+
+  out(Role.admin)
+  out(Role.guest(label: "trial"))
+
+  checked: result[int, str] = ok(1)
+  out(checked)
+
+  out(@[1, 2], @[3, 4])

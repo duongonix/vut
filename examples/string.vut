@@ -1,0 +1,76 @@
+# `str` — every built-in method.
+#
+# `find`, `rfind`, and `substring` use byte offsets; the character-oriented
+# methods (`chars`, `char_at`, and the `pad_*` width) use Unicode scalar values.
+# `out` accepts several values, so labels and results can be printed together.
+
+fn main():
+  text = "  Hello, Vut!  "
+
+  out("byte_len:", text.byte_len(), "char_len:", text.char_len())
+  out("is_empty:", text.is_empty())
+  out("trim=[", text.trim(), "]")
+  out("trim_start=[", text.trim_start(), "] trim_end=[", text.trim_end(), "]")
+  out("lower:", text.to_lower())
+  out("upper:", text.to_upper())
+  out("contains(Vut):", text.contains("Vut"))
+  out("starts_with(spaces):", text.starts_with("  "))
+  out("ends_with(bang):", text.ends_with("!  "))
+  out("find(Vut):", text.find("Vut"))
+  out("substring:", text.trim().substring(0, 5))
+
+  trimmed = text.trim()
+  replaced = trimmed.replace("Vut", "World")
+  out("replace:", replaced)
+
+  csv = "a,b,c"
+  parts = csv.split(",")
+  out("split:", parts)
+
+  joined = ""
+  first = true
+  for part in parts:
+    if first:
+      first = false
+    else:
+      joined = joined + "-"
+    joined = joined + part
+  out("joined:", joined)
+
+  report = "one\ntwo\nthree"
+  out("lines:", report.lines())
+
+  spaced = " a  b\tc "
+  out("split_whitespace:", spaced.split_whitespace())
+
+  scalar = "aé中"
+  out("chars:", scalar.chars())
+  out("char_at(1):", scalar.char_at(1))
+  out("char_at(99):", scalar.char_at(99))
+
+  repeated_piece = "ab"
+  out("repeat:", repeated_piece.repeat(3))
+
+  single = "7"
+  out("pad_left:", single.pad_left(3, "0"))
+  out("pad_right:", single.pad_right(3, "."))
+
+  prefixed = "prefix-body"
+  out("strip_prefix:", prefixed.strip_prefix("prefix-"))
+  bare = "body"
+  out("strip_absent:", bare.strip_prefix("nope"))
+
+  suffixed = "body-suffix"
+  out("strip_suffix:", suffixed.strip_suffix("-suffix"))
+
+  fruit = "banana"
+  out("rfind(an):", fruit.rfind("an"))
+  out("compare:", fruit.compare("apple"))
+
+  number = "42"
+  decimal = "2.5"
+  out("to_int:", number.to_int(), "to_float:", decimal.to_float())
+  out("to_i64:", number.to_i64(), "to_f64:", decimal.to_f64())
+
+  blob = "hi".to_bytes()
+  out("to_bytes:", blob)

@@ -1,0 +1,28 @@
+fn double(value: int) -> int:
+  value * 2
+
+fn apply(value: int, callback: fn(int) -> int) -> int:
+  callback(value)
+
+fn combine(a: int, b: int, callback: fn(int, int) -> int) -> int:
+  callback(a, b)
+
+fn hello(callback: fn()) -> void:
+  callback()
+
+fn main():
+  from_arrow = apply(10, x => x * 2)
+  out("$from_arrow")
+
+  from_block = apply(10, fn(x):
+    value = x * 2
+    value + 10
+  )
+  out("$from_block")
+
+  from_named = apply(21, double)
+  out("$from_named")
+
+  out("$(combine(3, 4, (a, b) => a + b))")
+
+  hello(() => out("Hello"))

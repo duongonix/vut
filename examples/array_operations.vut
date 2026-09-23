@@ -1,0 +1,11 @@
+fn main():
+  values = [1, 2, 3, 4]
+  out("$(values.len())")
+  out("$(values.first())")
+  out("$(values.last())")
+  at_two = values.at(2)
+  out("$at_two")
+  values.set(0, 10)
+  out("$(values.first())")
+  values.fill(7)
+  out("$(values.last())")

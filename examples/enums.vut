@@ -1,0 +1,48 @@
+# Payload enums and pattern matching.
+#
+# An enum variant may carry named payload fields. Patterns bind those fields,
+# support nested patterns, `or`, integer ranges, string literals, and guards.
+
+enum Shape:
+  point
+  circle(radius: float)
+  rect(width: float, height: float)
+
+enum Option:
+  none
+  some(value: str)
+
+fn area(shape: Shape) -> float:
+  match shape:
+    point: 0.0
+    circle(radius = r): 3.0 * r * r
+    rect(width = w, height = h): w * h
+
+fn describe(value: int) -> str:
+  match value:
+    0: "zero"
+    1 or 2: "small"
+    3..=9: "medium"
+    _ if value < 0: "negative"
+    _: "large"
+
+fn classify(option: Option) -> str:
+  match option:
+    some(value = "hi"): "exact"
+    some(value = _): "some"
+    none: "none"
+
+fn main():
+  out("circle: $(area(Shape.circle(radius: 2.0)))")
+  out("rect: $(area(Shape.rect(width: 3.0, height: 4.0)))")
+  out("point: $(area(Shape.point))")
+
+  out(describe(0))
+  out(describe(2))
+  out(describe(5))
+  out(describe(-1))
+  out(describe(100))
+
+  out(classify(Option.some(value: "hi")))
+  out(classify(Option.some(value: "bye")))
+  out(classify(Option.none))

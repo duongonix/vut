@@ -1,0 +1,25 @@
+import os
+import process
+
+fn main():
+  out("pid: $(process.id())")
+
+  # Pick a program that exists on the current platform.
+  program = "cmd"
+  args: list[str] = @["/C", "echo", "hello from child"]
+  if os.family() != "windows":
+    program = "echo"
+    args = @["hello from child"]
+
+  match process.status(program, args, ""):
+    ok(status): out("child succeeded: $(status.success())")
+    err(error): out("status error: $(error.message)")
+
+  match process.output(program, args, ""):
+    ok(output): out("captured stdout bytes: $(output.stdout.len())")
+    err(error): out("output error: $(error.message)")
+
+  missing: list[str] = @[]
+  match process.status("vut-no-such-program-xyz", missing, ""):
+    ok(status): out("unexpected success: $(status.success())")
+    err(error): out("expected failure: $(error.message)")

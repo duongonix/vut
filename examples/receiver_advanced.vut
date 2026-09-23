@@ -1,0 +1,46 @@
+# Receiver Functions with parameters, receiver invocation, and control flow.
+#
+# `UserCard(user) (event, index):` is an anonymous receiver function: the
+# receiver (`CardScope`) is bound to `self`, while `event` and `index` are its
+# ordinary parameters, passed at `body.call(scope, event, index)`.
+
+data User:
+  name: str
+
+data Event:
+  clicked: bool
+
+data CardScope:
+  title: str
+
+fn UserCard(user: User, body: fn(CardScope)(Event, int) -> void) -> void:
+  scope = CardScope(title: user.name)
+  event = Event(clicked: true)
+  body.call(scope, event, 1)
+
+fn CardScope.Text(text: str) -> void:
+  out("text=$text")
+
+fn CardScope.Divider() -> void:
+  out("---")
+
+fn main():
+  user = User(name: "ann")
+  UserCard(user) (event, index):
+    Text("card: $(self.title) index: $index")
+
+    if event.clicked:
+      Text("clicked")
+    else:
+      Text("idle")
+
+    for tag in @["a", "b"]:
+      Text("tag: $tag")
+
+    match index:
+      1:
+        Text("first")
+      _:
+        Text("other")
+
+    Divider()

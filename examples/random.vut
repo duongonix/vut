@@ -1,0 +1,24 @@
+# Standard library randomness — `math.rng` and `math.random*`.
+#
+# Pseudo-random and **not** cryptographically secure. An explicitly seeded
+# generator is reproducible; the global functions use a thread-local generator
+# seeded from OS entropy.
+import math
+
+fn main():
+  # An explicitly seeded generator produces a reproducible sequence.
+  rng = math.rng(42)
+  out("random: $(rng.random())")
+  out("random_int(1, 6): $(rng.random_int(1, 6))")
+  out("random_float(0, 1): $(rng.random_float(0.0, 1.0))")
+  out("random_bool: $(rng.random_bool())")
+
+  # The same seed yields the same first value.
+  first = math.rng(42)
+  second = math.rng(42)
+  out("reproducible: $(first.random() == second.random())")
+
+  # The global generator is seeded from OS entropy (values vary per run).
+  out("global_int: $(math.random_int(10, 20))")
+  out("global_float: $(math.random_float(0.0, 1.0))")
+  out("global_bool: $(math.random_bool())")

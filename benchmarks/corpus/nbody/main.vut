@@ -1,0 +1,69 @@
+fn simulate(
+    x: list[float],
+    y: list[float],
+    vx: list[float],
+    vy: list[float],
+    mass: list[float],
+    steps: int
+):
+    step = 0
+
+    for step < steps:
+        i = 0
+
+        # Tính lực giữa từng cặp vật thể
+        for i < x.len():
+            j = i + 1
+
+            for j < x.len():
+                dx = x[j] - x[i]
+                dy = y[j] - y[i]
+
+                dist2 = dx * dx + dy * dy + 0.000001
+                inv_dist = 1.0 / sqrt(dist2)
+                inv_dist3 = inv_dist * inv_dist * inv_dist
+
+                force = mass[i] * mass[j] * inv_dist3
+
+                fx = dx * force
+                fy = dy * force
+
+                vx[i] = vx[i] + fx / mass[i]
+                vy[i] = vy[i] + fy / mass[i]
+
+                vx[j] = vx[j] - fx / mass[j]
+                vy[j] = vy[j] - fy / mass[j]
+
+                j = j + 1
+
+            i = i + 1
+
+        # Cập nhật vị trí
+        i = 0
+
+        for i < x.len():
+            x[i] = x[i] + vx[i]
+            y[i] = y[i] + vy[i]
+
+            i = i + 1
+
+        step = step + 1
+
+
+fn main():
+    x: list[float] = @(0.0, 1.0, -1.0, 0.5, -0.5)
+    y: list[float] = @(0.0, 0.5, -0.5, -1.0, 1.0)
+
+    vx: list[float] = @(0.01, -0.02, 0.03, -0.01, 0.02)
+    vy: list[float] = @(0.02, 0.01, -0.02, 0.03, -0.01)
+
+    mass: list[float] = @(10.0, 5.0, 7.0, 3.0, 6.0)
+
+    simulate(x, y, vx, vy, mass, 100000)
+
+    out("Final positions:")
+
+    i = 0
+    for i < x.len():
+        out("$i: ($(x[i]), $(y[i]))")
+        i = i + 1

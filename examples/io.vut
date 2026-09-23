@@ -1,0 +1,14 @@
+import io
+
+fn main():
+  match io.eprint("to stderr without newline"):
+    ok(written): out("eprint ok")
+    err(error): out("eprint error")
+
+  match io.eprintln(" and a trailing newline"):
+    ok(written): out("eprintln ok")
+    err(error): out("eprintln error")
+
+  match io.flush():
+    ok(flushed): out("flush ok")
+    err(error): out("flush error")

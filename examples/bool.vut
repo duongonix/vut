@@ -1,0 +1,25 @@
+# `bool` — `to_str` and how booleans drive control flow.
+#
+# Vut has no truthiness: conditions must be `bool`.
+
+fn main():
+  out("true:", true.to_str())
+  out("false:", false.to_str())
+
+  flag = 3 > 2
+  out("flag:", flag.to_str())
+
+  if flag:
+    out("taken")
+  else:
+    out("not taken")
+
+  values = @[true, false, true]
+  count = 0
+  for value in values:
+    if value:
+      count = count + 1
+  out("true_count:", count, "of:", values.len())
+
+  label = flag.to_str()
+  out("label:", label)

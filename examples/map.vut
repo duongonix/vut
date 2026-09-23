@@ -1,0 +1,54 @@
+# `map[K,V]` — every built-in method.
+#
+# Key iteration order is unspecified, so examples that print keys/values sort
+# them first. `get`/`remove` report a missing key through the optional model
+# (`V?`); `get_or` is the non-failing fallback.
+
+fn main():
+  scores: map[str, int] = ("ann": 10, "bob": 20)
+  out("len:", scores.len(), "is_empty:", scores.is_empty())
+
+  scores.reserve(16)
+  out("capacity_ok:", scores.capacity() >= 16)
+
+  scores.set("cara", 30)
+  out("contains_key(ann):", scores.contains_key("ann"))
+  ann: int? = scores.get("ann")
+  if ann != null:
+    out("get(ann):", ann)
+  missing: int? = scores.get("zed")
+  if missing == null:
+    out("get(zed): absent")
+  out("get_or(missing):", scores.get_or("zed", 0))
+
+  removed: int? = scores.remove("bob")
+  if removed != null:
+    out("removed:", removed)
+
+  keys = scores.keys()
+  keys.sort()
+  out("keys:", keys)
+
+  values = scores.values()
+  values.sort()
+  out("values:", values)
+
+  scores.clear()
+  out("cleared_len:", scores.len())
+
+  # Integer keys are supported too.
+  counts: map[int, str] = (2: "two", 1: "one")
+  int_keys = counts.keys()
+  int_keys.sort()
+  out("int_keys:", int_keys)
+
+  int_values = counts.values()
+  int_values.sort()
+  out("int_values:", int_values)
+
+  # Look up every key through the non-failing API.
+  total = 0
+  for key in int_keys:
+    if counts.contains_key(key):
+      total = total + key
+  out("total_keys:", total)

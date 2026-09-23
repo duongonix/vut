@@ -1,0 +1,14 @@
+fn main():
+  scores: map[int, int] = ()
+  i = 0
+  for i < 2000:
+    scores.set(i, i * 2)
+    i = i + 1
+  total = 0
+  j = 0
+  for j < 2000:
+    value: int? = scores.get(j)
+    if value != null:
+      total = total + value
+    j = j + 1
+  out("$total")

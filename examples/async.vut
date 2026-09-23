@@ -1,0 +1,88 @@
+# Async/await example for Vut's single-thread async foundation.
+#
+# Defined by specs/async/. An `async fn` exposes a logical signature; calling
+# it produces an awaitable computation and `await` drives it to completion.
+# Async is single-threaded: there are no threads and no parallel execution.
+
+data User:
+  name: str
+  age: int
+
+fn User.label() -> str:
+  "$(self.name) ($(self.age))"
+
+# --- Async sources ---------------------------------------------------------
+
+async fn fetch_name() -> str:
+  "Nam"
+
+async fn read_age() -> int:
+  20
+
+# An async method with the implicit receiver.
+async fn User.with_name(name: str) -> User:
+  User(
+    name: name,
+    age: self.age
+  )
+
+# --- Async composition -----------------------------------------------------
+
+# Multiple awaits run in order, one after another.
+async fn compute_total() -> int:
+  first = await read_age()
+  second = await read_age()
+  first + second
+
+# Result + await: `await` waits for the computation, `?` propagates an error.
+async fn load_age() -> result[int, str]:
+  age = await read_age()
+  ok(age)
+
+async fn load_name() -> result[str, str]:
+  name = await fetch_name()
+  ok(name)
+
+# Nested await in an argument position, and `return await`.
+async fn load_name_len() -> int:
+  return name_len(await fetch_name())
+
+fn name_len(text: str) -> int:
+  text.char_len()
+
+# --- Entry point -----------------------------------------------------------
+
+async fn main():
+  # `await` in an assignment.
+  greeting = await fetch_name()
+  out("Hello $greeting")
+
+  # Multiple awaits through a helper.
+  total = await compute_total()
+  out("total: $total")
+
+  # Result-returning async chain handled with `match`. Inside result-returning
+  # async code, `await read_async()?` parses as `(await read_async())?`.
+  aged = await load_age()
+  match aged:
+    ok(value): out("age: $value")
+    err(message): out("error: $message")
+
+  named = await load_name()
+  match named:
+    ok(text): out("name: $text")
+    err(message): out("error: $message")
+
+  # await inside a call argument and a template interpolation.
+  out("name length: $(await load_name_len())")
+
+  # await inside a list literal.
+  names: list[str] = @[await fetch_name(), greeting]
+  for name in names:
+    out("name: $name")
+
+  # Async method call with the implicit receiver, then field access.
+  base = User(name: "Nam", age: 20)
+  out(base.label())
+  renamed = await base.with_name("Ha")
+  out(renamed.name)

@@ -1,0 +1,48 @@
+import fs
+
+fn main():
+  file = "vut_example_fs.txt"
+
+  match fs.write_str(file, "first line\n"):
+    ok(written): out("write ok")
+    err(error): out("write error: $(error.message)")
+
+  out("exists: $(fs.exists(file))")
+  out("is_file: $(fs.is_file(file))")
+  out("is_dir: $(fs.is_dir(file))")
+
+  match fs.append_str(file, "second line\n"):
+    ok(appended): out("append ok")
+    err(error): out("append error: $(error.message)")
+
+  match fs.read_str(file):
+    ok(text): out("contents:\n$text")
+    err(error): out("read error: $(error.message)")
+
+  match fs.metadata(file):
+    ok(meta): out("size: $(meta.len()) file: $(meta.is_file()) readonly: $(meta.readonly())")
+    err(error): out("metadata error: $(error.message)")
+
+  copied = "vut_example_fs_copy.txt"
+  match fs.copy(file, copied):
+    ok(size): out("copied bytes: $size")
+    err(error): out("copy error: $(error.message)")
+
+  moved = "vut_example_fs_moved.txt"
+  match fs.rename(copied, moved):
+    ok(renamed): out("rename ok")
+    err(error): out("rename error: $(error.message)")
+
+  match fs.read_dir("."):
+    ok(entries): out("entries in current directory: $(entries.len())")
+    err(error): out("read_dir error: $(error.message)")
+
+  match fs.remove_file(moved):
+    ok(removed): out("removed moved file")
+    err(error): out("remove error: $(error.message)")
+
+  match fs.remove_file(file):
+    ok(removed): out("removed file")
+    err(error): out("remove error: $(error.message)")
+
+  out("exists after cleanup: $(fs.exists(file))")

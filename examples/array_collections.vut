@@ -1,0 +1,12 @@
+fn main():
+  values = [1, 2, 3, 4]
+  out("length: $(values.len())")
+  out("first: $(values.first())")
+  out("last: $(values.last())")
+  out("at 2: $(values.at(2))")
+
+  values.set(0, 10)
+  values.fill(7)
+
+  for value, index in values:
+    out("$index: $value")

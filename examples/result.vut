@@ -1,0 +1,46 @@
+# `result[T, E]` — construction, matching, `?`, and helper methods.
+
+fn parse_positive(text: str) -> result[int, str]:
+  value = text.to_i64()
+  if value > 0:
+    return ok(value)
+  err("not a positive number")
+
+fn doubled(text: str) -> result[int, str]:
+  value = parse_positive(text)?
+  ok(value * 2)
+
+fn describe(value: result[int, str]) -> str:
+  if value.is_ok():
+    return "ok value"
+  "error value"
+
+fn main():
+  match parse_positive("42"):
+    ok(value): out("ok:", value)
+    err(message): out("err:", message)
+
+  match parse_positive("0"):
+    ok(value): out("ok:", value)
+    err(message): out("err:", message)
+
+  # `?` propagates the error to the caller.
+  match doubled("21"):
+    ok(value): out("doubled_ok:", value)
+    err(message): out("doubled_err:", message)
+
+  match doubled("0"):
+    ok(value): out("doubled_ok:", value)
+    err(message): out("doubled_err:", message)
+
+  # Helper methods.
+  good: result[int, str] = ok(7)
+  bad: result[int, str] = err("nope")
+
+  out("good is_ok:", good.is_ok(), "is_err:", good.is_err())
+  out("good unwrap_or:", good.unwrap_or(0))
+  out("bad is_ok:", bad.is_ok(), "is_err:", bad.is_err())
+  out("bad unwrap_or:", bad.unwrap_or(99))
+
+  out(describe(good))
+  out(describe(bad))

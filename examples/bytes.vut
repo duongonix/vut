@@ -1,0 +1,76 @@
+# `bytes` — managed byte buffer: methods, hex, UTF-8, and endian I/O.
+#
+# `bytes` is a contiguous, growable buffer distinct from `str` and `list[u8]`.
+# Fixed-width reads/writes always state their byte order (`_le`/`_be`).
+
+data Packet:
+  label: str
+  payload: bytes
+
+fn main():
+  blob = bytes()
+  blob.push(104)
+  blob.push(105)
+  out("blob:", blob)
+
+  extra: list[u8] = @[33, 33]
+  suffix = bytes.from_list(extra)
+  blob.extend(suffix)
+  out("extended:", blob)
+
+  out("find:", blob.find(suffix))
+  out("starts_with:", blob.starts_with(suffix), "ends_with:", blob.ends_with(suffix))
+  out("compare:", blob.compare(suffix))
+
+  blob.truncate(2)
+  out("truncated:", blob)
+  blob.resize(4, 65)
+  out("resized:", blob)
+
+  # Hex round-trips; `from_hex` reports the first bad digit via `HexError`.
+  hex = blob.to_hex()
+  out("hex:", hex)
+  match bytes.from_hex(hex):
+    ok(value): out("roundtrip:", value)
+    err(error): out("roundtrip_error:", error.index)
+  match bytes.from_hex("zz"):
+    ok(value): out("bad:", value)
+    err(error): out("bad_index:", error.index)
+  match bytes.from_hex("abc"):
+    ok(value): out("odd:", value)
+    err(error): out("odd_index:", error.index)
+
+  # Access and conversion.
+  out("len:", blob.len(), "is_empty:", blob.is_empty())
+  out("first:", blob.first(), "last:", blob.last(), "at(1):", blob.at(1))
+  out("byte_at(1):", blob.byte_at(1))
+  part = blob.slice(0, 2)
+  out("slice:", part)
+  out("capacity_ok:", blob.capacity() >= blob.len())
+
+  match blob.to_str():
+    ok(text): out("text:", text)
+    err(error): out("invalid_at:", error.valid_up_to, "error_len:", error.error_len)
+
+  packet = Packet(label: "p", payload: blob)
+  out("packet_payload:", packet.payload)
+
+  # Explicit-endian fixed-width I/O.
+  buf = bytes()
+  buf.resize(8, 0)
+  buf.write_u32_le(0, 305419896)
+  out("buf_hex:", buf.to_hex())
+  out("read_u32_le:", buf.read_u32_le(0))
+  out("read_u32_be:", buf.read_u32_be(0))
+  buf.write_i16_be(4, 258)
+  out("read_i16_be:", buf.read_i16_be(4))
+  out("read_i16_le:", buf.read_i16_le(4))
+  buf.write_i64_le(0, 0 - 1)
+  out("read_i64_le:", buf.read_i64_le(0))
+
+  # Invalid UTF-8 is reported rather than silently replaced.
+  raw: list[u8] = @[255, 254]
+  broken = bytes.from_list(raw)
+  match broken.to_str():
+    ok(text): out("text:", text)
+    err(error): out("invalid_at:", error.valid_up_to, "error_len:", error.error_len)

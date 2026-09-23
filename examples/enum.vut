@@ -1,0 +1,64 @@
+# Payload enums and pattern matching in Vut.
+#
+# A variant may carry named payload fields. `match` binds those fields and
+# supports nested patterns, `or`, integer ranges, string literals, and guards.
+
+enum Color:
+  red
+  yellow
+  green
+
+enum Command:
+  quit
+  move(dx: int, dy: int)
+  say(text: str)
+
+fn color_name(color: Color) -> str:
+  match color:
+    red: "red"
+    yellow: "yellow"
+    green: "green"
+
+fn describe(command: Command) -> str:
+  match command:
+    quit: "quit"
+    move(dx = x, dy = y) if x == 0 and y == 0: "stay"
+    move(dx = x, dy = y): "move $(x),$(y)"
+    say(text = message): "say $message"
+
+fn classify(code: int) -> str:
+  match code:
+    0: "ok"
+    1 or 2 or 3: "warn"
+    4..=9: "error"
+    _ if code < 0: "negative"
+    _: "unknown"
+
+fn command_code(command: Command) -> result[int, str]:
+  match command:
+    quit: ok(0)
+    move(dx = x, dy = y): ok(x + y)
+    say(text = message): err(message)
+
+fn main():
+  out(color_name(Color.red))
+  out(color_name(Color.green))
+
+  out(describe(Command.quit))
+  out(describe(Command.move(dx: 3, dy: 4)))
+  out(describe(Command.move(dx: 0, dy: 0)))
+  out(describe(Command.say(text: "hello")))
+
+  out(classify(0))
+  out(classify(2))
+  out(classify(7))
+  out(classify(-1))
+  out(classify(42))
+
+  match command_code(Command.move(dx: 10, dy: 5)):
+    ok(code): out("code: $(code)")
+    err(message): out("error: $message")
+
+  match command_code(Command.say(text: "nope")):
+    ok(code): out("code: $(code)")
+    err(message): out("error: $message")

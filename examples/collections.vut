@@ -1,0 +1,49 @@
+# Collection methods — the standard higher-order operations are builtins on
+# `list[T]`, so no import is required.
+#
+# Callbacks are function values: pass a named function or a capturing or
+# non-capturing lambda. `sort_by` is stable; `find_index` returns `-1` when
+# nothing matches.
+
+fn double(value: int) -> int:
+  value * 2
+
+fn is_even(value: int) -> bool:
+  value % 2 == 0
+
+fn add(acc: int, value: int) -> int:
+  acc + value
+
+fn compare_int(left: int, right: int) -> int:
+  left - right
+
+fn greater_than_ten(value: int) -> bool:
+  value > 10
+
+fn main():
+  items = @[3, 1, 2, 4]
+
+  out("map:", items.map(double))
+  out("filter:", items.filter(is_even))
+  out("fold:", items.fold(0, add))
+  out("any_even:", items.any(is_even))
+  out("all_even:", items.all(is_even))
+  out("find_index_even:", items.find_index(is_even))
+  out("find_index_gt_10:", items.find_index(fn(value: int):
+    value > 10
+  ))
+
+  sorted = @[5, 3, 9, 1]
+  sorted.sort_by(compare_int)
+  out("sort_by:", sorted)
+
+  words: list[str] = @["a", "b", "c"]
+  out("join:", words.join("-"))
+
+  # Compose: keep even values, then double them.
+  evens = items.filter(is_even)
+  out("doubled_evens:", evens.map(double))
+
+  # A capturing callback: `factor` is captured by value.
+  factor = 10
+  out("scaled:", items.map(x => x * factor))

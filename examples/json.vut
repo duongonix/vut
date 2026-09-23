@@ -1,0 +1,53 @@
+# JSON parsing, dynamic access, and serialization.
+#
+# `json.parse` yields a typed `json.Value`; accessors are checked (no silent
+# coercion) and return `result[_, json.Error]`. Object key order is not
+# significant and serialization does not promise a specific order.
+import json
+import json at Value, EncodeOptions
+
+fn print_text(value: Value):
+  match value.as_str():
+    ok(text): out("name: $text")
+    err(error): out("name: <not a string>")
+
+fn print_int(value: Value):
+  match value.as_int():
+    ok(number): out("version: $number")
+    err(error): out("version: <not an integer>")
+
+fn print_array(value: Value):
+  match value.as_array():
+    ok(items): out("tags: $(items.len())")
+    err(error): out("tags: <not an array>")
+
+fn report(value: Value):
+  is_object = value.is_object()
+  out("object: $is_object")
+  match value.get("name"):
+    ok(name): print_text(name)
+    err(error): out("name: <missing>")
+  match value.get("version"):
+    ok(version): print_int(version)
+    err(error): out("version: <missing>")
+  match value.get("tags"):
+    ok(tags): print_array(tags)
+    err(error): out("tags: <missing>")
+
+fn show_value(value: Value):
+  report(value)
+  out("compact: $(json.stringify(value))")
+  out("pretty:")
+  out(json.stringify_pretty(value))
+  options = EncodeOptions(pretty: true, indent: 2)
+  out("options: $(json.stringify_with(value, options))")
+
+fn show(source: str):
+  match json.parse(source):
+    ok(value): show_value(value)
+    err(error): out("parse error at $(error.line):$(error.column): $(error.message)")
+
+fn main():
+  show("{\"name\":\"Vut\",\"version\":1,\"tags\":[\"fast\",\"typed\"]}")
+  show("{\"name\":[\"not\",\"a\",\"string\"]}")
+  show("{\"a\":}")

@@ -1,0 +1,120 @@
+# HTTP client examples (specs/std/http.md).
+#
+# These functions are compile-checked but not executed by the test suite: the
+# canonical examples would require network access. They show the current syntax
+# for each documented feature.
+import http
+import http at Error, Method, Request, Response, Status, Stream
+import time
+import json
+import json at Value
+
+# Shape returned by the example endpoint. `type` is a reserved word, so the Vut
+# field is named `type_name`; the JSON key is read dynamically below.
+data Activity:
+  activity: str
+  availability: float
+  type_name: str
+  participants: int
+  price: float
+  accessibility: str
+  duration: str
+  kid_friendly: bool
+  link: str
+  key: str
+
+async fn simple_get(url: str) -> result[str, Error]:
+  response = await http.get(url)?
+  response.text()
+
+async fn post_string(url: str, body: str) -> result[Response, Error]:
+  await http.post(url, body)
+
+async fn post_bytes(url: str, body: bytes) -> result[Response, Error]:
+  await http.post_bytes(url, body)
+
+async fn custom_headers(url: str) -> result[Response, Error]:
+  request = Request(method: Method.get, url: url)
+  request.header("Authorization", "Bearer token")
+  request.header("Accept", "application/json")
+  await request.send()
+
+async fn query_parameters(url: str) -> result[Response, Error]:
+  request = Request(method: Method.get, url: url)
+  request.query("page", "2")
+  request.query("limit", "20")
+  await request.send()
+
+async fn client_reuse(url: str) -> result[Response, Error]:
+  client = http.client(time.seconds(30), 5)
+  await client.get(url)
+
+async fn with_timeout(url: str) -> result[Response, Error]:
+  request = Request(method: Method.get, url: url)
+  request.timeout(time.seconds(30))
+  await request.send()
+
+fn status_text(code: int) -> str:
+  status = Status(code: code)
+  text: str = if status.is_success():
+    "success"
+  elif status.is_redirect():
+    "redirect"
+  elif status.is_client_error():
+    "client-error"
+  elif status.is_server_error():
+    "server-error"
+  else:
+    "other"
+  text
+
+fn chunk_len(outcome: result[bytes, Error]) -> int:
+  value: int = match outcome:
+    ok(chunk): chunk.len()
+    err(error): 0
+  value
+
+async fn drain(stream: Stream) -> int:
+  total = 0
+  for:
+    next = await stream.read()
+    length = chunk_len(next)
+    if length == 0:
+      break
+    total = total + length
+  total
+
+async fn streaming_download(url: str) -> int:
+  stream = http.get_stream(url)
+  await drain(stream)
+
+async fn range_request(url: str) -> result[Response, Error]:
+  request = Request(method: Method.get, url: url)
+  request.range(0, 1023)
+  await request.send()
+
+async fn error_handling(url: str) -> str:
+  outcome = await http.get(url)
+  message: str = match outcome:
+    ok(response): "status=$(response.status.code)"
+    err(error): error.message
+  message
+
+fn print_activity(value: Value):
+  match value.get("activity"):
+    ok(field): print_text(field)
+    err(error): out("activity: <missing>")
+
+fn print_text(value: Value):
+  match value.as_str():
+    ok(text): out("activity: $text")
+    err(error): out("activity: <not a string>")
+
+async fn main():
+  # A nested `match` as a multi-statement arm body.
+  match await simple_get("https://bored-api.appbrewery.com/random"):
+    ok(body):
+      match json.parse(body):
+        ok(value): print_activity(value)
+        err(error): out("json error: $(error.message)")
+    err(error): out("simple get: error = $(error.message)")

@@ -1,0 +1,23 @@
+import os
+
+fn main():
+  out("name: $(os.name())")
+  out("arch: $(os.arch())")
+  out("family: $(os.family())")
+  out("cpus: $(os.cpu_count())")
+
+  match os.home_dir():
+    ok(value): out("home: $value")
+    err(error): out("home error: $(error.message)")
+
+  match os.temp_dir():
+    ok(value): out("temp: $value")
+    err(error): out("temp error: $(error.message)")
+
+  match os.current_dir():
+    ok(value): out("cwd: $value")
+    err(error): out("cwd error: $(error.message)")
+
+  match os.current_exe():
+    ok(value): out("exe: $value")
+    err(error): out("exe error: $(error.message)")

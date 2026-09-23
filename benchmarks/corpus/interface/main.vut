@@ -1,0 +1,28 @@
+interface Animal:
+  legs() -> int
+
+data Dog:
+  name: str
+
+data Bird:
+  name: str
+
+fn Dog.legs() -> int:
+  4
+
+fn Bird.legs() -> int:
+  2
+
+fn legs_of(animal: Animal) -> int:
+  animal.legs()
+
+fn main():
+  total = 0
+  i = 0
+  for i < 100000:
+    if i % 2 == 0:
+      total = total + legs_of(Dog(name: "d"))
+    else:
+      total = total + legs_of(Bird(name: "b"))
+    i = i + 1
+  out("$total")

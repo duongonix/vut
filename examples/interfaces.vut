@@ -1,0 +1,41 @@
+# Interfaces and dynamic dispatch in Vut.
+#
+# A concrete `data` type satisfies an interface when it implements every
+# requirement. Converting a concrete value to an interface value boxes it and
+# attaches a vtable; method calls dispatch on the value's dynamic type.
+
+interface Animal:
+  speak() -> str
+  legs() -> int
+
+data Dog:
+  name: str
+
+data Bird:
+  name: str
+
+fn Dog.speak() -> str:
+  "woof"
+
+fn Dog.legs() -> int:
+  4
+
+fn Bird.speak() -> str:
+  "tweet"
+
+fn Bird.legs() -> int:
+  2
+
+fn describe(animal: Animal) -> str:
+  "$(animal.speak()) has $(animal.legs()) legs"
+
+fn pick(wide: bool) -> Animal:
+  if wide:
+    return Dog(name: "Rex")
+  return Bird(name: "Pip")
+
+fn main():
+  out(describe(Dog(name: "Rex")))
+  out(describe(Bird(name: "Pip")))
+  out(describe(pick(true)))
+  out(describe(pick(false)))

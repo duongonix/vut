@@ -1,0 +1,19 @@
+fn count_primes(limit: int) -> int:
+  count = 0
+  number = 2
+  for number < limit:
+    prime = true
+    divisor = 2
+    for divisor * divisor <= number:
+      if number % divisor == 0:
+        prime = false
+        break
+      divisor = divisor + 1
+    if prime:
+      count = count + 1
+    number = number + 1
+  count
+
+fn main():
+  result = count_primes(400000)
+  out("primes below 400000: $result")

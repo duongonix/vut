@@ -1,0 +1,8 @@
+fn main():
+  values = [1, 2, 3, 4, 5]
+  total = 0
+  i = 0
+  for i < values.len():
+    total = total + values.at(i)
+    i = i + 1
+  out("$total")

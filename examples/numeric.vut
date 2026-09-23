@@ -1,0 +1,37 @@
+# Numeric scalars — `int` and `float` built-in methods.
+#
+# Integer `pow` saturates on overflow; float helpers follow IEEE-754, with NaN
+# handled explicitly (`is_nan`, `is_finite`, `to_int` maps NaN to 0).
+
+fn main():
+  negative: int = 0 - 7
+  out("abs:", negative.abs())
+  out("to_str:", negative.to_str())
+
+  base = 3
+  out("pow:", base.pow(4))
+  out("min:", base.min(5), "max:", base.max(5), "clamp:", base.clamp(1, 2))
+
+  f = 2.5
+  out("floor:", f.floor(), "ceil:", f.ceil())
+  out("round:", f.round(), "trunc:", f.trunc())
+
+  nine: float = 9.0
+  out("sqrt:", nine.sqrt())
+  out("pow_half:", nine.pow(0.5))
+
+  neg: float = 0.0 - 2.5
+  out("fabs:", neg.abs())
+
+  out("fmin:", f.min(3.0), "fmax:", f.max(3.0), "fclamp:", f.clamp(1.0, 2.0))
+
+  out("is_nan:", f.is_nan(), "is_finite:", f.is_finite())
+  out("to_int:", f.to_int())
+
+  # A negative square root produces NaN.
+  root = neg.sqrt()
+  out("root_is_nan:", root.is_nan(), "root_is_finite:", root.is_finite())
+  out("nan_to_int:", root.to_int())
+
+  out("int_to_float:", base.to_float())
+  out("char:", 65.to_char())

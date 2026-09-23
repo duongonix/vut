@@ -1,0 +1,84 @@
+# Generics: parameterized data, enums, interfaces, functions, constraints,
+# and inference at call sites. Every specialization is monomorphized.
+
+# Generic data with one and two type parameters.
+data Box[T]:
+  value: T
+
+data Pair[A, B]:
+  first: A
+  second: B
+
+# Generic enum with a payload variant.
+enum Maybe[T]:
+  none
+  some(value: T)
+
+# Generic interface used as a constraint below.
+interface Container[T]:
+  get() -> T
+
+interface Comparable:
+  compare(other: int) -> int
+
+data Num:
+  n: int
+
+fn Num.compare(other: int) -> int:
+  self.n - other
+
+fn Num.get() -> int:
+  self.n
+
+# Type arguments are inferred from the call arguments.
+fn identity[T](value: T) -> T:
+  value
+
+fn first[T](a: T, b: T) -> T:
+  a
+
+# A constrained generic function: `T` must satisfy `Comparable`.
+fn max_of[T: Comparable](a: T, b: T) -> T:
+  a
+
+# Generic functions may mention generic data parameterized by their params.
+fn wrap[T](value: T) -> Box[T]:
+  Box(value: value)
+
+fn unwrap_box(box: Box[int]) -> int:
+  box.value
+
+fn main():
+  # Generic function inference over different concrete types.
+  number = identity(123)
+  text = identity("hello")
+  chosen = first(1, 2)
+  out("identity: $number $text")
+  out("first: $chosen")
+
+  # Generic data: construction infers type arguments, fields are specialized.
+  box = Box(value: 42)
+  out("box: $(box.value)")
+  annotated: Box[int] = Box(value: 7)
+  out("annotated: $(annotated.value)")
+
+  pair = Pair(first: "x", second: Box(value: 3))
+  out("pair: $(pair.first) $(pair.second.value)")
+
+  # Generic enum: annotated variant construction and exhaustive match.
+  present: Maybe[str] = Maybe.some(value: "here")
+  match present:
+    none: out("maybe: none")
+    some(value): out("maybe: $value")
+  absent: Maybe[int] = Maybe.none
+  match absent:
+    none: out("empty: none")
+    some(value): out("empty: $value")
+
+  # A constrained generic function accepts any satisfying type.
+  winner = max_of(Num(n: 1), Num(n: 2))
+  out("max: $(winner.n)")
+
+  # Generic helpers over generic data, including a transitive specialization.
+  wrapped = wrap(5)
+  out("wrap: $(unwrap_box(wrapped))")

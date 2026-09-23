@@ -1,0 +1,146 @@
+{
+  "schema": 1,
+  "channel": "stable",
+  "version": "0.1.0",
+  "released_at": "2026-09-23T15:07:14Z",
+  "compiler": {
+    "version": "0.1.0",
+    "cranelift": "0.135.2",
+    "profile": "release"
+  },
+  "runtime_abi": 13,
+  "stdlib_version": "0.1.0",
+  "manifest_format": 1,
+  "targets": [
+    {
+      "triple": "aarch64-apple-darwin",
+      "os": "macos",
+      "arch": "aarch64",
+      "url": "https://github.com/duongonix/vut/releases/download/v0.1.0/vut-v0.1.0-aarch64-apple-darwin.tar.gz",
+      "sha256": "261cf9788bab5c136a6b15e1195323b99e79bc08309f52e2fef63b42e4350a5b",
+      "size": 34657769,
+      "archive": "vut-v0.1.0-aarch64-apple-darwin.tar.gz",
+      "abi_version": 13,
+      "minimum_os": "11.0",
+      "sdk": {
+        "windows_build_tools": false,
+        "xcode_clt": true,
+        "cc": false
+      }
+    },
+    {
+      "triple": "aarch64-pc-windows-msvc",
+      "os": "windows",
+      "arch": "aarch64",
+      "url": "https://github.com/duongonix/vut/releases/download/v0.1.0/vut-v0.1.0-aarch64-pc-windows-msvc.zip",
+      "sha256": "45cbf115921299a91c033d0c657955ff65800a37037997f65b89486148438206",
+      "size": 30672439,
+      "archive": "vut-v0.1.0-aarch64-pc-windows-msvc.zip",
+      "abi_version": 13,
+      "minimum_os": "10",
+      "sdk": {
+        "windows_build_tools": true,
+        "xcode_clt": false,
+        "cc": false
+      }
+    },
+    {
+      "triple": "aarch64-unknown-linux-gnu",
+      "os": "linux",
+      "arch": "aarch64",
+      "libc": "glibc",
+      "url": "https://github.com/duongonix/vut/releases/download/v0.1.0/vut-v0.1.0-aarch64-unknown-linux-gnu.tar.gz",
+      "sha256": "45500fbce293c8dc637e745250d8e1fd305b88fae75b1db8270fbe16610b5c7b",
+      "size": 37219087,
+      "archive": "vut-v0.1.0-aarch64-unknown-linux-gnu.tar.gz",
+      "abi_version": 13,
+      "minimum_os": "glibc-2.31",
+      "sdk": {
+        "windows_build_tools": false,
+        "xcode_clt": false,
+        "cc": true
+      }
+    },
+    {
+      "triple": "aarch64-unknown-linux-musl",
+      "os": "linux",
+      "arch": "aarch64",
+      "libc": "musl",
+      "url": "https://github.com/duongonix/vut/releases/download/v0.1.0/vut-v0.1.0-aarch64-unknown-linux-musl.tar.gz",
+      "sha256": "95001e31054bcd6f0ed6b21d5b3ed1e4498be09d273b1a93464220aa1ab4cd0e",
+      "size": 37316263,
+      "archive": "vut-v0.1.0-aarch64-unknown-linux-musl.tar.gz",
+      "abi_version": 13,
+      "sdk": {
+        "windows_build_tools": false,
+        "xcode_clt": false,
+        "cc": true
+      }
+    },
+    {
+      "triple": "x86_64-apple-darwin",
+      "os": "macos",
+      "arch": "x86_64",
+      "url": "https://github.com/duongonix/vut/releases/download/v0.1.0/vut-v0.1.0-x86_64-apple-darwin.tar.gz",
+      "sha256": "309328d934ae718317b54b9ba504d09d3beedd4ceee4265f934ba21a66e4f62b",
+      "size": 36730469,
+      "archive": "vut-v0.1.0-x86_64-apple-darwin.tar.gz",
+      "abi_version": 13,
+      "minimum_os": "11.0",
+      "sdk": {
+        "windows_build_tools": false,
+        "xcode_clt": true,
+        "cc": false
+      }
+    },
+    {
+      "triple": "x86_64-pc-windows-msvc",
+      "os": "windows",
+      "arch": "x86_64",
+      "url": "https://github.com/duongonix/vut/releases/download/v0.1.0/vut-v0.1.0-x86_64-pc-windows-msvc.zip",
+      "sha256": "1c8ba6317523f1961eefc16812f0949b4d72898e0819b7613cbbb94ddf8f7a37",
+      "size": 32787479,
+      "archive": "vut-v0.1.0-x86_64-pc-windows-msvc.zip",
+      "abi_version": 13,
+      "minimum_os": "10",
+      "sdk": {
+        "windows_build_tools": true,
+        "xcode_clt": false,
+        "cc": false
+      }
+    },
+    {
+      "triple": "x86_64-unknown-linux-gnu",
+      "os": "linux",
+      "arch": "x86_64",
+      "libc": "glibc",
+      "url": "https://github.com/duongonix/vut/releases/download/v0.1.0/vut-v0.1.0-x86_64-unknown-linux-gnu.tar.gz",
+      "sha256": "fa9dc3528b6120598b3a65ed829311fb744a6ad737a2ad946f4d94765d3c6e84",
+      "size": 38562606,
+      "archive": "vut-v0.1.0-x86_64-unknown-linux-gnu.tar.gz",
+      "abi_version": 13,
+      "minimum_os": "glibc-2.31",
+      "sdk": {
+        "windows_build_tools": false,
+        "xcode_clt": false,
+        "cc": true
+      }
+    },
+    {
+      "triple": "x86_64-unknown-linux-musl",
+      "os": "linux",
+      "arch": "x86_64",
+      "libc": "musl",
+      "url": "https://github.com/duongonix/vut/releases/download/v0.1.0/vut-v0.1.0-x86_64-unknown-linux-musl.tar.gz",
+      "sha256": "8daf7a01fc8fde9892fb901d351e723541c2e8677ff73ac6ba06c2ac8228a6ad",
+      "size": 38995215,
+      "archive": "vut-v0.1.0-x86_64-unknown-linux-musl.tar.gz",
+      "abi_version": 13,
+      "sdk": {
+        "windows_build_tools": false,
+        "xcode_clt": false,
+        "cc": true
+      }
+    }
+  ]
+}

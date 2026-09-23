@@ -1,0 +1,51 @@
+# Standard library math — constants, float utilities, integer algorithms.
+#
+# `float` is IEEE-754 binary64 and `int` arithmetic wraps on overflow. The
+# transcendental functions delegate to the platform libm and follow IEEE-754:
+# domain errors yield NaN, overflow yields ±Inf, underflow yields 0.
+import math
+
+fn main():
+  # Constants.
+  out("pi: $(math.PI)")
+  out("tau: $(math.TAU)")
+  out("e: $(math.E)")
+
+  # Rounding and sign.
+  value = 0.0 - 2.5
+  out("floor: $(math.floor(value)) ceil: $(math.ceil(value))")
+  out("round: $(math.round(value)) trunc: $(math.trunc(value))")
+  out("fract: $(math.fract(value)) sign: $(math.sign(value))")
+
+  # Powers and roots.
+  out("sqrt(9): $(math.sqrt(9.0))")
+  out("cbrt(27): $(math.cbrt(27.0))")
+  out("pow(2, 10): $(math.pow(2.0, 10.0))")
+  out("powi(2, 10): $(math.powi(2.0, 10))")
+
+  # Exponential and logarithm.
+  out("exp(0): $(math.exp(0.0)) exp2(3): $(math.exp2(3.0))")
+  out("log(e): $(math.log(math.E))")
+  out("log2(8): $(math.log2(8.0)) log10(1000): $(math.log10(1000.0))")
+
+  # Trigonometry (radians).
+  out("sin(pi/2): $(math.sin(math.PI / 2.0))")
+  out("cos(0): $(math.cos(0.0))")
+  out("atan2(1, 1): $(math.atan2(1.0, 1.0))")
+  out("degrees(pi): $(math.degrees(math.PI))")
+
+  # Scalar utilities.
+  out("copysign(3, -1): $(math.copysign(3.0, 0.0 - 1.0))")
+  out("hypot(3, 4): $(math.hypot(3.0, 4.0))")
+  out("fma(2, 3, 4): $(math.fma(2.0, 3.0, 4.0))")
+
+  # Integer algorithms.
+  out("gcd(12, 18): $(math.gcd(12, 18))")
+  out("lcm(4, 6): $(math.lcm(4, 6))")
+  out("is_power_of_two(64): $(math.is_power_of_two(64))")
+
+  # Classification.
+  root = math.sqrt(0.0 - 1.0)
+  out("is_nan(sqrt(-1)): $(math.is_nan(root))")
+  out("is_finite(1): $(math.is_finite(1.0))")
+  out("is_inf(1/0): $(math.is_inf(1.0 / 0.0))")

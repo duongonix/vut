@@ -1,0 +1,26 @@
+import path
+
+# Lexical path handling only; never touches the filesystem.
+#
+# `path.parent`, `path.file_name`, `path.extension`, and `path.stem` return
+# optionals (`str?`); optional unwrapping is not available yet, so this example
+# sticks to the total functions.
+fn main():
+  joined = path.join("assets", "image.png")
+  out("join: $joined")
+
+  absolute = path.is_absolute("/tmp/file.txt")
+  relative = path.is_relative("a/b")
+  out("is_absolute: $absolute is_relative: $relative")
+
+  separator = path.separator()
+  messy = "a" + separator + "." + separator + "x" + separator + ".." + separator + "b"
+  normalized = path.normalize(messy)
+  out("normalize: $normalized")
+
+  parts = path.components(joined)
+  out("components: $(parts.len())")
+  for part in parts:
+    out("  - $part")
+
+  out("separator: [$separator]")

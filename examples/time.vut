@@ -1,0 +1,16 @@
+import time
+
+fn main():
+  stamp = time.now()
+  out("epoch seconds: $(stamp.unix_seconds())")
+  out("epoch milliseconds: $(stamp.unix_milliseconds())")
+
+  start = time.instant()
+  time.sleep(time.milliseconds(5))
+  finish = time.instant()
+
+  span = time.elapsed(start, finish)
+  out("elapsed milliseconds: $(span.as_milliseconds())")
+
+  one_second = time.seconds(1)
+  out("one second in milliseconds: $(one_second.as_milliseconds())")

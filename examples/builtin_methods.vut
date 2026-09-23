@@ -1,0 +1,23 @@
+fn main():
+  values: list[int] = @[10, 20, 30]
+  out("list length: $(values.len())")
+  out("list empty: $(values.is_empty())")
+
+  text = "  Vut Language  "
+  contains = text.contains("Vut")
+  starts = text.starts_with("  Vut")
+  ends = text.ends_with("  ")
+  replaced = text.replace("Vut", "VUT")
+  out("bytes: $(text.byte_len())")
+  out("chars: $(text.char_len())")
+  out("empty: $(text.is_empty())")
+  out("contains: $contains")
+  out("starts: $starts")
+  out("ends: $ends")
+  out("trimmed: $(text.trim())")
+  out("lower: $(text.to_lower())")
+  out("upper: $(text.to_upper())")
+  out("replace: $replaced")
+
+  answer = 42
+  out("number: $(answer.to_str())")

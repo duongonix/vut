@@ -1,0 +1,5 @@
+fn main():
+  hello = "hello"
+  hi = "hi"
+  c = "xin chao " + hello + hi
+  out(c)

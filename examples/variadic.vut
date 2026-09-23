@@ -1,0 +1,41 @@
+# Variadic parameters.
+#
+# `...values: T` accepts zero or more arguments of type `T` and must be the last
+# parameter. Inside the body it is a read-only view with iteration, `len()`, and
+# `at(i)`. A call may spread a matching sequence with `...values`.
+fn sum(...values: int) -> int:
+  total = 0
+  for value in values:
+    total = total + value
+  total
+
+fn head(...values: int) -> int:
+  if values.len() == 0:
+    return 0
+  values.at(0)
+
+fn join(...parts: str) -> str:
+  text = ""
+  for part in parts:
+    text = text + part
+  text
+
+fn main():
+  empty = sum()
+  out("empty=$empty")
+
+  total = sum(1, 2, 3, 4)
+  out("sum=$total")
+
+  numbers = @[10, 20, 30]
+  spread = sum(...numbers)
+  out("spread=$spread")
+
+  first = head(9, 8, 7)
+  out("head=$first")
+
+  missing = head()
+  out("missing=$missing")
+
+  joined = join("va", "ri", "adic")
+  out("join=$joined")

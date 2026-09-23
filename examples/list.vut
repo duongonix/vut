@@ -1,0 +1,58 @@
+# `list[T]` — every built-in method.
+#
+# `list[T]` is the growable homogeneous collection (`@[...]` literal). Indexing
+# is via `.at(i)` / `.set(i, v)`; there is no `[]` syntax.
+
+fn main():
+  items: list[int] = @[3, 1, 2]
+  out("len=$(items.len()) is_empty=$(items.is_empty())")
+
+  items.reserve(16)
+  out("capacity_ok=$(items.capacity() >= 16)")
+
+  items.push(4)
+  items.insert(0, 9)
+  out("after insert=$items")
+
+  out("at(1)=$(items.at(1))")
+  items.set(1, 8)
+  out("after set=$items")
+
+  removed = items.remove(0)
+  out("removed=$removed remaining=$items")
+
+  out("contains(2)=$(items.contains(2)) contains(99)=$(items.contains(99))")
+  out("index_of(2)=$(items.index_of(2)) index_of(99)=$(items.index_of(99))")
+  out("first=$(items.first()) last=$(items.last())")
+
+  popped = items.pop()
+  out("popped=$popped remaining=$items")
+
+  sliced = items.slice(0, 2)
+  out("slice=$sliced")
+
+  items.extend(@[7, 8])
+  out("extended=$items")
+
+  items.reverse()
+  out("reversed=$items")
+
+  items.sort()
+  out("sorted=$items")
+
+  items.swap(0, 1)
+  out("swapped=$items")
+
+  items.truncate(2)
+  out("truncated=$items")
+
+  items.shrink_to_fit()
+  out("shrunk_capacity=$(items.capacity())")
+
+  items.clear()
+  out("cleared=$items is_empty=$(items.is_empty())")
+
+  # Iteration yields elements (and optionally the index).
+  words: list[str] = @["b", "a", "c"]
+  for word, index in words:
+    out("word $index = $word")

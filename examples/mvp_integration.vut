@@ -1,0 +1,21 @@
+data User:
+  name: str
+  age: int
+
+fn User.greet():
+  out("Hello $(self.name)")
+
+fn main():
+  name = input("Name: ")
+
+  user = User(
+    name: name,
+    age: 20
+  )
+
+  user.greet()
+
+  values: list[int] = @[10, 20, 30]
+
+  for value, index in values:
+    out("$index: $value")

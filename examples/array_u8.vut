@@ -1,0 +1,5 @@
+fn main():
+  bytes: array[u8, 4] = [10, 20, 30, 40]
+  bytes.set(1, 99)
+  for value, index in bytes:
+    out("$index:$value")
