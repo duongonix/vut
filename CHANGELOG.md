@@ -6,6 +6,35 @@ follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.2.0]
+
+### Added
+
+- WebAssembly (WASI) backend (preview): `vut build --target wasm32-wasip1` and
+  `vut run --target wasm32-wasip1` emit a validated `.wasm` module and run it
+  under a discovered WASI runtime, with an actionable error when the runtime is
+  missing.
+- WASM codegen: scalars, arithmetic, control flow, functions, locals and calls;
+  linear memory with an allocator and `memory.grow`; bounds and panic traps;
+  `str`, `bytes` and `list` with real RC/COW; optionals, results, data/enums,
+  arrays, maps, iterators, closures and higher-order operations.
+- WASM async: target-independent state-machine lowering with a single-threaded
+  cooperative executor (`StartFuture`, `AwaitFuture`, `FrameState`, resume
+  thunks).
+- WASM ABI/exports: explicit export surface plus function-level dead-code
+  elimination that retains reachable roots.
+- WASM standard-library subset (WASI): `math` (all native transcendentals) and
+  the `count`/`env`/`time`/`io`/`os`/`random` infrastructure; unsupported
+  native-runtime modules produce explicit diagnostics instead of failing
+  silently.
+- VPM target integration and a basic `-Os` size optimization for WASM.
+
+### Notes
+
+- The WebAssembly target is a preview: WASM.14 production certification is not
+  complete. See `specs/roadmap/wasm.md` for phase status. Native semantics and
+  ABI are unchanged.
+
 ## [0.1.0]
 
 ### Added
@@ -29,5 +58,6 @@ follow [Semantic Versioning](https://semver.org/).
 - Supported targets: `x86_64`/`aarch64` for Windows (MSVC), Linux (glibc and
   musl), and macOS.
 
-[Unreleased]: https://github.com/duongonix/vut_repo/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/duongonix/vut_repo/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/duongonix/vut_repo/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/duongonix/vut_repo/releases/tag/v0.1.0
