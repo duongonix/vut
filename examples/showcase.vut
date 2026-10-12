@@ -1,21 +1,6 @@
-# A small Vut program exercising functions, data, methods, lists, loops,
-# and both forms of template interpolation.
-
-data Counter:
-  value: int
-
-fn Counter.get() -> int:
-  self.value
-
-fn double(value: int) -> int:
-  value * 2
+fn add(a: int, b: int) -> int:
+  return a + b
 
 fn main():
-  counter = Counter(value: 21)
-  values: list[int] = @[10, 20, 30]
-
-  out("Welcome to Vut!")
-  for value, index in values:
-    out("item $index = $value")
-
-  out("The answer is $(double(counter.get()))")
+  result = add(b = 2, a = 3)
+  out(result)

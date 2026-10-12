@@ -6,6 +6,24 @@ follow [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+## [0.3.0]
+
+### Added
+
+- Receiver Functions with typed receiver callbacks, trailing-body syntax and
+  compile-time receiver resolution.
+- Native M:N async scheduling and typed vut/vutcon[T] execution units.
+- VPM local package dependencies, external tool resolution and expanded
+  package/workspace workflows.
+- Native asynchronous HTTP client support in std/http.
+- A browser playground backed by the WebAssembly compiler.
+
+### Improved
+
+- Generic checking, closure lowering, compiler diagnostics and editor
+  completion for the expanded language and package APIs.
+- Native callback/runtime error reporting and ownership-focused ABI coverage.
+
 ## [0.2.0]
 
 ### Added
@@ -58,6 +76,7 @@ follow [Semantic Versioning](https://semver.org/).
 - Supported targets: `x86_64`/`aarch64` for Windows (MSVC), Linux (glibc and
   musl), and macOS.
 
-[Unreleased]: https://github.com/duongonix/vut_repo/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/duongonix/vut_repo/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/duongonix/vut_repo/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/duongonix/vut_repo/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/duongonix/vut_repo/releases/tag/v0.1.0

@@ -16,7 +16,7 @@ fn FormScope.Field(name: str) -> bool:
 
 fn main():
   scope = FormScope(label: "signup")
-  submit = capture() (name):
+  submit = capture()(name):
     Field(name)
 
   accepted = submit.call(scope, "email")

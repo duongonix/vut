@@ -1,6 +1,6 @@
 #[inline(never)]
 fn add(a: i64, b: i64) -> i64 {
-    a + b
+    if b > 0 { a + b } else { a - b }
 }
 
 fn main() {

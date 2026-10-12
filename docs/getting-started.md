@@ -45,9 +45,11 @@ cd myapp
 vpm run
 ```
 
-A project has a `vpm.toml` manifest and a `src/` directory whose library entry
-point is `src/mod.vut`. Executables are declared with `[[bin]]`. Dependencies are
-added with `vpm add <package>` and pinned in `vpm.lock`.
+A project has a `vpm.toml` manifest and a `src/` directory. `vpm new` creates
+an executable application whose entry point is `fn main` in `src/main.vut`; use
+`vpm new mylib --lib` for a library (`src/mod.vut`) or `vpm new mytool --bin`
+for a packaged CLI declared with `[[bin]]`. Dependencies are added with
+`vpm add <package>` and pinned in `vpm.lock`.
 
 ## Modules and imports
 

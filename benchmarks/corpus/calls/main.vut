@@ -1,5 +1,7 @@
 fn add(a: int, b: int) -> int:
-  a + b
+  if b > 0:
+    return a + b
+  a - b
 
 fn main():
   total = 0

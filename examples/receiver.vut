@@ -31,7 +31,7 @@ fn App(body: fn(AppScope)() -> void) -> void:
   out(scope)
 
 fn main():
-  App():
-    Column():
-      Button("Save")
-      Button("Cancel")
+  App:
+    Column:
+      Button(text = "Save")
+      Button(text = "Cancel")

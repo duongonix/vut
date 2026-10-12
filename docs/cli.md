@@ -31,14 +31,15 @@ a list of issues and exits non-zero. `--json` emits a machine-readable report.
 ## `vpm`
 
 ```text
-vpm new <name>            create a project
-vpm init                  initialize a project in place
+vpm new <name> [--lib|--bin]   create a project
+vpm init [--lib|--bin]         initialize a project in place
 vpm add <package>         add a dependency
 vpm remove <package>      remove a dependency
 vpm install [package]     install dependencies (or a global CLI package)
 vpm update                update dependencies within the lockfile rules
-vpm build | check | test | run
-vpm exec [--bin <name>] -- <args>   run an installed global CLI
+vpm build | check | test | run | watch [name]
+vpm watch [name]                    list/start a watcher from `vpm.toml`
+vpm exec [--bin <name>] -- <args>   run a published CLI package
 vpm uninstall <package>   remove a global CLI package
 vpm publish [registry] [--dry-run]
 ```

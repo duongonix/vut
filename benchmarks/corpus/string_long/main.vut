@@ -1,0 +1,12 @@
+import env
+
+fn main():
+  count = env.args().len().to_int() * 50000
+  text = ""
+  i = 0
+  for i < count:
+    text = text + "ab"
+    i = i + 1
+  length = text.byte_len()
+  tail = text.substring(length - 2, length)
+  out("$length:$tail")

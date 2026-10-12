@@ -1,0 +1,8 @@
+fn main():
+  total = 0.0
+  i = 0
+  for i < 5000000:
+    x = i.to_float()
+    total = total + x.sqrt() + (x - 3.0).abs() + x.floor() + x.ceil() + x.trunc()
+    i = i + 1
+  out("$(total.to_int())")
